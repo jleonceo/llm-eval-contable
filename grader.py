@@ -1,17 +1,21 @@
-"""Grader for the contable-experto eval.
+"""
+Grader del eval contable-experto.
+Grader for the contable-experto eval.
 
+Compara cada respuesta del modelo contra el expected output del dataset.
 Compares each model response against the expected output in the dataset.
 
-Validations:
-- If a brake is expected: empty lineas + flag freno_nominas = true
-- Entry balance: |Σdebe - Σhaber| < 0.01
-- For each expected line: find a matching actual line by PGC prefix + amount
-  on the correct side (debit/credit), tolerance ±€0.01
-- Semantic flags: exact match
+Validaciones / Validations:
+- Si se espera freno: lineas vacías + flag freno_nominas = true
+  If brake expected: empty lineas + flag freno_nominas = true
+- Cuadre del asiento / Entry balance: |Σdebe - Σhaber| < 0.01
+- Coincidencia por prefijo PGC + importe + lado (tolerancia ±€0,01)
+  PGC prefix match + amount + side (tolerance ±€0.01)
+- Flags semánticos / Semantic flags: exact match
 
-Usage:
-    python grader.py                               (list available results)
-    python grader.py results/2026-05-27_1200.json  (grade a result file)
+Uso / Usage:
+    python grader.py                               (lista runs / list runs)
+    python grader.py results/2026-05-27_1200.json  (evalúa / grade)
 """
 
 import json
@@ -24,7 +28,8 @@ TOLERANCIA = 0.01
 
 
 def grade_caso(expected: dict, actual: dict) -> dict:
-    """Returns dict with score (0-1), issues list, pass bool."""
+    """Devuelve dict con score (0-1), lista de issues y pass.
+    Returns dict with score (0-1), issues list and pass bool."""
     issues = []
 
     if "_parse_error" in actual:
@@ -38,17 +43,17 @@ def grade_caso(expected: dict, actual: dict) -> dict:
     expected_estado = expected.get("estado", "OK")
     actual_estado = actual.get("estado", "OK")
     if expected_estado != actual_estado:
-        issues.append(f"Estado: expected {expected_estado}, received {actual_estado}")
+        issues.append(f"Estado: esperado {expected_estado}, recibido {actual_estado}")
 
-    # 2. Brake case: empty lineas + flag active
+    # 2. Caso freno: lineas vacías + flag activo
     expected_freno = expected.get("flags", {}).get("freno_nominas", False)
     if expected_freno:
         actual_lineas = actual.get("lineas", [])
         if len(actual_lineas) > 0:
-            issues.append(f"Expected brake (0 lines), received {len(actual_lineas)} lines")
+            issues.append(f"Esperado freno (0 líneas), recibido {len(actual_lineas)} líneas")
         actual_freno = actual.get("flags", {}).get("freno_nominas", False)
         if not actual_freno:
-            issues.append("Expected flag freno_nominas=true")
+            issues.append("Esperado flag freno_nominas=true")
         passed = len(issues) == 0
         return {
             "pass": passed,
@@ -56,10 +61,10 @@ def grade_caso(expected: dict, actual: dict) -> dict:
             "issues": issues,
         }
 
-    # 3. Balance check
+    # 3. Cuadre del asiento
     actual_lineas = actual.get("lineas", [])
     if not actual_lineas:
-        issues.append("No lines in entry")
+        issues.append("Sin líneas en el asiento")
         return {"pass": False, "score": 0.0, "issues": issues}
 
     total_debe = sum(float(linea.get("debe", 0)) for linea in actual_lineas)
@@ -67,10 +72,10 @@ def grade_caso(expected: dict, actual: dict) -> dict:
     diff = total_debe - total_haber
     if abs(diff) > TOLERANCIA:
         issues.append(
-            f"Entry out of balance: debe={total_debe:.2f} haber={total_haber:.2f} diff={diff:.2f}"
+            f"Asiento descuadrado: debe={total_debe:.2f} haber={total_haber:.2f} diff={diff:.2f}"
         )
 
-    # 4. Expected lines vs actual lines (PGC prefix + amount + side)
+    # 4. Líneas esperadas vs actuales (prefijo PGC + importe + lado)
     matched = 0
     expected_lineas = expected.get("lineas", [])
     for exp in expected_lineas:
@@ -93,17 +98,17 @@ def grade_caso(expected: dict, actual: dict) -> dict:
             matched += 1
         else:
             lado = f"debe={exp_debe:.2f}" if exp_debe > 0 else f"haber={exp_haber:.2f}"
-            issues.append(f"Missing line with prefix {prefix}* and {lado}")
+            issues.append(f"Falta línea con prefijo {prefix}* y {lado}")
 
     score_lineas = matched / len(expected_lineas) if expected_lineas else 0
 
-    # 5. Semantic flags — exact match
+    # 5. Flags semánticos — coincidencia exacta
     expected_flags = expected.get("flags", {})
     actual_flags = actual.get("flags", {})
     for flag, exp_val in expected_flags.items():
         act_val = actual_flags.get(flag, False)
         if exp_val != act_val:
-            issues.append(f"Flag {flag}: expected {exp_val}, received {act_val}")
+            issues.append(f"Flag {flag}: esperado {exp_val}, recibido {act_val}")
 
     passed = len(issues) == 0
     return {
@@ -114,14 +119,15 @@ def grade_caso(expected: dict, actual: dict) -> dict:
 
 
 def grade_all(results) -> list[dict]:
-    """Accepts a list of results or a full payload dict with 'results' key."""
+    """Acepta lista de results o payload completo con clave 'results'.
+    Accepts list of results or full payload dict with 'results' key."""
     if isinstance(results, dict) and "results" in results:
         model = results.get("model", "?")
         timestamp = results.get("timestamp", "?")
         results = results["results"]
-        header = f"\nRESULTS · model={model} · timestamp={timestamp}"
+        header = f"\nRESULTADOS · modelo={model} · timestamp={timestamp}"
     else:
-        header = "\nRESULTS"
+        header = "\nRESULTADOS"
 
     grades = []
     for r in results:
@@ -136,24 +142,24 @@ def grade_all(results) -> list[dict]:
 
     print(header)
     print("=" * 70)
-    print(f"{passed}/{total} cases pass ({100*passed/total:.0f}%) · avg score: {100*avg_score:.0f}%")
+    print(f"{passed}/{total} casos pasan ({100*passed/total:.0f}%) · score medio: {100*avg_score:.0f}%")
     print("=" * 70)
 
-    # Breakdown by category
+    # Desglose por categoría
     cat_stats = defaultdict(lambda: {"pass": 0, "total": 0})
     for g in grades:
         cat_stats[g["categoria"]]["total"] += 1
         if g["pass"]:
             cat_stats[g["categoria"]]["pass"] += 1
 
-    print("\nBy category:")
+    print("\nPor categoría:")
     for cat, stats in sorted(cat_stats.items()):
         print(f"  {cat:<25} {stats['pass']}/{stats['total']}")
 
-    print("\nDetail:")
+    print("\nDetalle:")
     for g in grades:
         emoji = "[OK]" if g["pass"] else "[FAIL]"
-        print(f"  {emoji} Case {g['caso_id']:>2} [{g['categoria']}] · score {100*g['score']:.0f}%")
+        print(f"  {emoji} Caso {g['caso_id']:>2} [{g['categoria']}] · score {100*g['score']:.0f}%")
         for issue in g["issues"]:
             print(f"        - {issue}")
 
@@ -164,13 +170,13 @@ def grade_all(results) -> list[dict]:
 def list_results():
     results_dir = Path(__file__).parent / "results"
     if not results_dir.exists():
-        print("No results yet. Run: python runner.py")
+        print("No hay resultados todavía. Ejecuta: python runner.py")
         return
     files = sorted(results_dir.glob("*.json"))
     if not files:
-        print("No results yet. Run: python runner.py")
+        print("No hay resultados todavía. Ejecuta: python runner.py")
         return
-    print("Available results:")
+    print("Resultados disponibles:")
     for f in files:
         print(f"  {f.relative_to(Path(__file__).parent)}")
 
@@ -181,7 +187,7 @@ def main():
         return
     results_file = Path(sys.argv[1])
     if not results_file.exists():
-        print(f"ERROR: file not found: {results_file}")
+        print(f"ERROR: fichero no encontrado: {results_file}")
         sys.exit(1)
     payload = json.loads(results_file.read_text(encoding="utf-8"))
     grade_all(payload)

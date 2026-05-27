@@ -1,7 +1,10 @@
 # LLM Eval — Contable Experto
-**Automated evaluation framework for a Spanish PGC accounting LLM skill**
 
-> 50 test cases · 12 categories · 5 iterations · **66% → 94% accuracy** · AI cognitive bias mitigation
+**Framework de evaluación automática para una skill contable en LLM**
+*Automated evaluation framework for a Spanish PGC accounting LLM skill*
+
+> 50 casos de test · 12 categorías · 5 iteraciones · **66% → 94% de precisión** · Mitigación de sesgos cognitivos en IA
+> *50 test cases · 12 categories · 5 iterations · **66% → 94% accuracy** · AI cognitive bias mitigation*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-green.svg)](https://www.python.org/)
@@ -9,161 +12,168 @@
 
 ---
 
-## What This Is
-
-An eval-driven development pipeline to test, measure, and iteratively improve an LLM-based accounting assistant. The skill under test generates Spanish double-entry bookkeeping entries (PGC — *Plan General Contable*) from natural language descriptions.
-
-**The insight behind this project:** improving an LLM skill is not about writing more instructions — it's about measuring failure patterns systematically, fixing the root cause, and verifying fixes don't break passing cases (regression testing).
+🇪🇸 [Español](#español) · 🇬🇧 [English](#english)
 
 ---
 
-## Score Progression
+<a name="español"></a>
+## 🇪🇸 Español
 
-| Run | Score | Accuracy | Key change |
-|-----|-------|----------|------------|
-| Run 1 — baseline | 33 / 50 | 66% | Initial skill v1.0 |
-| Runs 2–3 | 36–38 / 50 | 72–76% | Taxonomy fixes, IVA rules |
-| Run 4 | 41 / 50 | 82% | Freno logic, payroll edge cases |
-| Run 5 | 44 / 50 | 88% | SaaS exception, 640 vs 641, embargo |
-| **Theoretical (v2.8)** | **47 / 50** | **94%** | Dataset corrections + skill refinements |
+### Qué es esto
 
-*Theoretical score verified by manual analysis of remaining failures after applying all v2.8 fixes.*
+Un pipeline de **desarrollo orientado a evaluación** para medir y mejorar iterativamente una skill LLM de contabilidad. La skill bajo test genera asientos contables de doble entrada (PGC — *Plan General Contable* español) a partir de descripciones en lenguaje natural.
+
+**La idea central:** mejorar una skill de LLM no es cuestión de escribir más instrucciones — es medir los patrones de fallo de forma sistemática, corregir la causa raíz, y verificar que las correcciones no rompen los casos que ya pasaban (regresión).
 
 ---
 
-## Test Coverage — 50 Cases, 12 Categories
+### Progresión de resultados
 
-| Category | Cases | What it tests |
-|---------|-------|---------------|
-| `facturas_emitidas` | 6 | B2B credit sales, B2C cash, discounts, returns, advances, collections |
-| `facturas_recibidas` | 6 | Purchases, service payments, rappels, advance suppliers |
-| `intracomunitario` | 4 | Intra-EU purchases/sales, ISP (reverse charge), VAT exemptions |
-| `isp_domestico` | 3 | Domestic reverse charge: construction works, rental |
-| `nominas_simples` | 4 | Payroll accrual (640/642/465/476), extra pay, bank transfer |
-| `nominas_irpf_embargos` | 3 | High IRPF, judicial garnishments (410 + 465 coexist) |
-| `amortizaciones` | 3 | Tangible assets (681/281), intangible assets (680/280) |
-| `periodificaciones` | 4 | Prepaid expenses (480), deferred income (485), accruals |
-| `cierre_regularizacion` | 4 | Inventory adj., impairment, result transfer, reversals |
-| `impuestos` | 5 | VAT settlement (303), IRPF payments (111/115), compensation |
-| `trampas_errores` | 4 | VAT-inclusive price traps, missing data triggers, unbalanced entries |
-| `leasing_renting` | 4 | Renting (operating lease), leasing activation, monthly payments |
+| Run | Puntuación | % | Versión skill | Cambio principal |
+|-----|-----------|---|---------------|-----------------|
+| Run 1 — baseline | 33 / 50 | 66% | v1.0 | Skill inicial |
+| Runs 2–3 | 36–38 / 50 | 72–76% | v1.5–v2.0 | Taxonomía IVA, reglas ISP |
+| Run 4 | 41 / 50 | 82% | v2.2 | Freno, asientos de nómina |
+| Run 5 | 44 / 50 | 88% | v2.6 | Excepción SaaS, 640 vs 641, embargo |
+| **Teórico (v2.8)** | **47 / 50** | **94%** | v2.8 | Correcciones dataset + aclaración devengo |
+
+*Puntuación teórica verificada manualmente por análisis de casos tras aplicar todas las correcciones v2.8.*
 
 ---
 
-## How the Eval Works
+### Cobertura — 50 casos, 12 categorías
 
-### Architecture
+| Categoría | Casos | Qué testea |
+|---------|-------|------------|
+| `facturas_emitidas` | 6 | Ventas B2B a crédito, B2C al contado, descuentos, devoluciones, anticipos, cobros |
+| `facturas_recibidas` | 6 | Compras, pagos de servicios, rappels, anticipos a proveedores |
+| `intracomunitario` | 4 | Adquisiciones/entregas intracomunitarias, ISP, exenciones IVA |
+| `isp_domestico` | 3 | ISP doméstico: ejecución de obras, arrendamiento con renuncia a exención |
+| `nominas_simples` | 4 | Devengo nómina (640/642/465/476), paga extra, pago en banco |
+| `nominas_irpf_embargos` | 3 | IRPF elevado, embargo judicial (410 + 465 coexisten) |
+| `amortizaciones` | 3 | Inmovilizado material (681/281), intangible (680/280) |
+| `periodificaciones` | 4 | Gastos anticipados (480), ingresos diferidos (485), accruals |
+| `cierre_regularizacion` | 4 | Variación existencias, deterioro, traspaso resultado, reversión |
+| `impuestos` | 5 | Liquidación IVA (303), pagos IRPF (111/115), compensación |
+| `trampas_errores` | 4 | IVA sobre precio total, datos insuficientes, asientos descuadrados |
+| `leasing_renting` | 4 | Renting (gasto corriente), activación leasing, cuotas mensuales |
+
+---
+
+### Cómo funciona el eval
+
+#### Arquitectura
 
 ```
-dataset_v2.json          ← 50 test cases with expected outputs
+dataset_v2.json          ← 50 casos de test con expected outputs
      │
      ▼
-runner.py  ──────────────── loads skill_prompt.md as system prompt
-     │                ───── calls Claude API (temperature=0)
-     │                ───── parses JSON response
+runner.py  ──────────────── carga skill_prompt.md como system prompt
+     │                ───── llama a la API de Claude (temperature=0)
+     │                ───── parsea la respuesta JSON
      ▼
-results/YYYY-MM-DD_HHMM_sonnet.json   ← raw output per case
+results/YYYY-MM-DD_HHMM_sonnet.json   ← output raw por caso
      │
      ▼
-grader.py  ──────────────── validates: account prefix match
-                       ───── validates: amount ± €0.01 tolerance
-                       ───── validates: balance (Σdebe = Σhaber)
-                       ───── validates: semantic flags
-                       ───── reports by category
+grader.py  ──────────────── valida: coincidencia por prefijo PGC
+                       ───── valida: importes ±€0,01 de tolerancia
+                       ───── valida: cuadre (Σdebe = Σhaber)
+                       ───── valida: flags semánticos
+                       ───── reporta por categoría
 ```
 
-### What the Grader Checks
+#### Qué verifica el grader
 
-1. **Estado** — OK vs PENDIENTE_VERIFICACION (mandatory brake when data is missing)
-2. **Balance** — total DEBE must equal total HABER (±€0.01)
-3. **Account lines** — each expected line must match by **PGC prefix** (not exact code), amount, and debit/credit side
-4. **Semantic flags** — `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
+1. **Estado** — OK vs PENDIENTE_VERIFICACION (freno obligatorio cuando faltan datos)
+2. **Cuadre** — total DEBE debe igualar total HABER (±€0,01)
+3. **Líneas del asiento** — cada línea esperada debe coincidir por **prefijo PGC** (no código exacto), importe y lado (debe/haber)
+4. **Flags semánticos** — `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
 
-The prefix-based matching (`startswith`) is key: the skill uses 8-digit company-specific codes (e.g. `62000001`), but the test only requires the correct PGC group (e.g. `62`). This tests accounting knowledge, not memorisation.
-
----
-
-## AI Cognitive Bias Mitigation
-
-The most interesting part of this project was applying **cognitive bias theory directly to prompt engineering**. Six biases were identified and addressed:
-
-### 1. Recency Bias
-*Problem:* the model's last "thought" before generating output anchors the response. If the most recent context is a positive example, the model leans permissive.
-
-*Fix:* Added a **pre-flight question** as the final instruction before the input — forcing the model to check for missing critical data (missing IRPF %, undeclared employer SS contribution) before writing any JSON.
-
-### 2. Confirmation Bias
-*Problem:* the model confirms the frame set by the question. "Contabiliza esta factura..." primes it to produce an entry, even when data is insufficient.
-
-*Fix:* Added an **8-step checklist** the model must run before producing the entry. The checklist resets the frame from "produce output" to "verify first".
-
-### 3. Anchoring Bias
-*Problem:* the first account mentioned in the description anchors the model's choice, even when wrong.
-
-*Fix:* The prompt explicitly lists categories where the "obvious" account is wrong (SaaS subscriptions → 62x not 20x, payroll accrual → 465 not 572).
-
-### 4. False Balance Bias
-*Problem:* when two accounting treatments are possible, the model hedges and picks the "average" — producing a hybrid entry that's wrong under both criteria.
-
-*Fix:* Hard rules with decision criteria. No "it could be either" — the prompt forces a binary decision based on explicit conditions (e.g. is the service period > 1 month? → mandatory periodificación).
-
-### 5. Sycophancy
-*Problem:* when the user's input implies an expected result (e.g. "make this entry: DEBE 600 / HABER 400"), the model complies even when it's wrong (unbalanced).
-
-*Fix:* The grader includes explicit **trap cases** (cases 43–46) where the correct answer is to refuse and return PENDIENTE_VERIFICACION.
-
-### 6. Cherry Picking
-*Problem:* the model selects the most favourable interpretation of ambiguous data instead of flagging the ambiguity.
-
-*Fix:* The pre-flight question distinguishes **truly derivable data** (standard 21% VAT, account structure) from **data that must be given** (IRPF %, employer SS rate, operation amount). Ambiguous data triggers the brake.
+La validación por prefijo (`startswith`) es clave: la skill usa códigos de 8 dígitos específicos de empresa (ej. `47200001`), pero el test solo exige el grupo PGC correcto (ej. `472`). Esto testea el conocimiento contable, no la memorización de códigos.
 
 ---
 
-## How to Use This Framework
+### Mitigación de sesgos cognitivos en IA
 
-### Prerequisites
+La parte más interesante del proyecto fue aplicar **teoría de sesgos cognitivos directamente al diseño del prompt**. Se identificaron y abordaron seis sesgos:
+
+#### 1. Sesgo de recencia
+*Problema:* el último "pensamiento" del modelo antes de generar output ancla la respuesta. Si el contexto más reciente es un ejemplo positivo, el modelo se vuelve permisivo.
+
+*Solución:* se añadió una **pregunta de pre-vuelo** como última instrucción antes del input — forzando al modelo a verificar si faltan datos críticos (% IRPF, cuota SS empresa) antes de escribir ningún JSON.
+
+#### 2. Sesgo de confirmación
+*Problema:* el modelo confirma el marco establecido por la pregunta. "Contabiliza esta factura..." lo predispone a producir un asiento aunque los datos sean insuficientes.
+
+*Solución:* se añadió un **checklist de 8 pasos** que el modelo debe ejecutar antes de producir el asiento. El checklist resetea el marco de "produce output" a "verifica primero".
+
+#### 3. Sesgo de anclaje
+*Problema:* la primera cuenta mencionada en la descripción ancla la elección del modelo, aunque sea incorrecta.
+
+*Solución:* reglas explícitas para categorías donde la cuenta "obvia" es incorrecta (suscripciones SaaS → 62x no 20x, devengo nómina → 465 no 572).
+
+#### 4. Falso equilibrio
+*Problema:* cuando existen dos tratamientos contables posibles, el modelo elige el "término medio" — produciendo un asiento híbrido incorrecto bajo ambos criterios.
+
+*Solución:* reglas binarias con criterios de decisión explícitos. Sin "podría ser cualquiera de los dos" — el prompt fuerza una decisión basada en condiciones concretas.
+
+#### 5. Servilismo (*sycophancy*)
+*Problema:* cuando el input del usuario implica un resultado esperado (ej. "haz este asiento: DEBE 600 / HABER 400"), el modelo cumple aunque sea incorrecto (descuadrado).
+
+*Solución:* **casos trampa** en el dataset (casos 43–46) donde la respuesta correcta es rechazar y devolver PENDIENTE_VERIFICACION.
+
+#### 6. *Cherry picking*
+*Problema:* el modelo selecciona la interpretación más favorable de datos ambiguos en lugar de señalar la ambigüedad.
+
+*Solución:* la pregunta de pre-vuelo distingue **datos derivables** (IVA estándar 21%, estructura del asiento) de **datos que deben proporcionarse** (% IRPF, tipo SS empresa, importe de la operación). Dato ambiguo = freno.
+
+---
+
+### Cómo usar este framework
+
+#### Requisitos previos
 
 ```bash
-# Python 3.10+, Conda recommended
+# Python 3.10+, se recomienda Conda
 conda create -n llm-eval python=3.10
 conda activate llm-eval
 pip install -r requirements.txt
 ```
 
-### Setup
+#### Setup
 
 ```bash
-# 1. Clone the repo
+# 1. Clonar el repo
 git clone https://github.com/jleonceo/llm-eval-contable.git
 cd llm-eval-contable
 
-# 2. Set your API key
+# 2. Configurar API key
 cp .env.example .env
-# Edit .env: ANTHROPIC_API_KEY=your_key_here
+# Editar .env: ANTHROPIC_API_KEY=tu_clave_aqui
 
-# 3. Add your skill prompt
+# 3. Añadir tu skill prompt
 cp skill_prompt.example.md skill_prompt.md
-# Edit skill_prompt.md with your actual system prompt
+# Editar skill_prompt.md con tu system prompt real
 ```
 
-### Run the eval
+#### Ejecutar el eval
 
 ```bash
-# Default: Claude Sonnet 4.6
+# Por defecto: Claude Sonnet 4.6
 python runner.py
 
-# Explicit model
+# Modelo explícito
 python runner.py --model sonnet
 python runner.py --model opus
 python runner.py --model haiku
 
-# Grade an existing result
+# Evaluar un resultado existente
 python grader.py results/2026-05-27_1200_sonnet.json
 ```
 
-### Adapt for your own skill
+#### Adaptar para tu propia skill
 
-The dataset expects JSON output with this structure:
+El dataset espera output JSON con esta estructura:
 
 ```json
 {
@@ -180,55 +190,55 @@ The dataset expects JSON output with this structure:
 }
 ```
 
-Replace `skill_prompt.md` with your system prompt. Adjust `dataset_v2.json` for your test cases. The `grader.py` logic is generic and reusable.
+Sustituye `skill_prompt.md` por tu system prompt. Ajusta `dataset_v2.json` con tus casos de test. La lógica de `grader.py` es genérica y reutilizable.
 
 ---
 
-## File Structure
+### Estructura de ficheros
 
 ```
 llm-eval-contable/
-├── README.md                   ← this file
-├── dataset_v2.json             ← 50 test cases with expected outputs
-├── grader.py                   ← evaluation and scoring logic
-├── runner.py                   ← API runner (loads skill_prompt.md)
-├── skill_prompt.md             ← your system prompt (NOT included — see .gitignore)
-├── skill_prompt.example.md     ← template showing required structure
+├── README.md                   ← este fichero
+├── dataset_v2.json             ← 50 casos de test con expected outputs
+├── grader.py                   ← lógica de evaluación y puntuación
+├── runner.py                   ← runner API (carga skill_prompt.md)
+├── skill_prompt.md             ← tu system prompt (NO incluido — ver .gitignore)
+├── skill_prompt.example.md     ← plantilla con la estructura requerida
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
 └── results/
-    └── summary.md              ← score progression across runs
+    └── summary.md              ← progresión de puntuaciones por run
 ```
 
 ---
 
-## Key Technical Decisions
+### Decisiones técnicas clave
 
-**Why prefix-based account matching?**
-The PGC uses a hierarchical chart of accounts. Companies extend with their own suffixes (e.g. `47200001` for a specific VAT account). Testing exact codes would make the eval brittle and company-specific. Prefix matching (`62x` = any expense account) tests the accounting knowledge that actually matters.
+**¿Por qué validación por prefijo PGC?**
+El PGC usa una jerarquía de cuentas. Las empresas las extienden con sufijos propios (ej. `47200001` para una cuenta IVA específica). Testear códigos exactos haría el eval frágil y específico de empresa. La validación por prefijo (`62x` = cualquier cuenta de gasto) testea el conocimiento contable que realmente importa.
 
-**Why temperature=0?**
-Reproducibility. At temperature > 0, the same case can pass or fail across runs for random reasons, making it impossible to attribute score changes to prompt changes. Zero temperature makes each run deterministic.
+**¿Por qué temperature=0?**
+Reproducibilidad. Con temperature > 0, el mismo caso puede pasar o fallar entre runs por razones aleatorias, haciendo imposible atribuir cambios de puntuación a cambios en el prompt. Temperature cero hace cada run determinista.
 
-**Why JSON output?**
-Structured output enables automated grading. Free-text accounting explanations are useful for humans but impossible to grade at scale. The JSON format also forces the model to be precise about amounts (no rounding in prose).
+**¿Por qué output en JSON?**
+El output estructurado permite evaluación automática. Las explicaciones contables en texto libre son útiles para humanos pero imposibles de evaluar a escala. El formato JSON además obliga al modelo a ser preciso con los importes.
 
-**Why a mandatory brake (PENDIENTE_VERIFICACION)?**
-A wrong entry in an accounting system is worse than no entry. The brake pattern — refuse and explain rather than guess — is the right behaviour for a production accounting assistant.
-
----
-
-## Results Detail
-
-See [`results/summary.md`](results/summary.md) for the full progression analysis with category breakdowns.
+**¿Por qué un freno obligatorio (PENDIENTE_VERIFICACION)?**
+Un asiento incorrecto en un sistema contable es peor que ningún asiento. El patrón freno — rechazar y explicar en lugar de adivinar — es el comportamiento correcto para un asistente contable en producción.
 
 ---
 
-## Author
+### Resultados detallados
+
+Ver [`results/summary.md`](results/summary.md) para el análisis completo con desglose por categoría y análisis de fallos.
+
+---
+
+### Autor
 
 **Juan Luis León Rodríguez**
-Data Analyst · Business Intelligence · Applied AI
+Analista de Datos · Business Intelligence · IA Aplicada al Negocio
 
 - 💼 [LinkedIn](https://linkedin.com/in/jlleonrodriguez/)
 - 🐙 [GitHub](https://github.com/jleonceo)
@@ -236,10 +246,63 @@ Data Analyst · Business Intelligence · Applied AI
 
 ---
 
-## License
+<a name="english"></a>
+## 🇬🇧 English
 
-MIT — see [LICENSE](LICENSE). Attribution appreciated.
+### What This Is
+
+An eval-driven development pipeline to test and iteratively improve an LLM-based accounting assistant. The skill under test generates Spanish double-entry bookkeeping entries (PGC — *Plan General Contable*) from natural language descriptions.
+
+**The core insight:** improving an LLM skill is not about writing more instructions — it's about measuring failure patterns systematically, fixing the root cause, and verifying fixes don't break passing cases (regression testing).
+
+### Score Progression
+
+| Run | Score | % | Key change |
+|-----|-------|---|------------|
+| Run 1 — baseline | 33 / 50 | 66% | Initial skill |
+| Runs 2–3 | 36–38 / 50 | 72–76% | VAT taxonomy, ISP rules |
+| Run 4 | 41 / 50 | 82% | Brake logic, payroll edge cases |
+| Run 5 | 44 / 50 | 88% | SaaS exception, 640 vs 641, garnishments |
+| **Theoretical (v2.8)** | **47 / 50** | **94%** | Dataset fixes + accrual clarification |
+
+### How It Works
+
+The grader validates each model response against the dataset expected output:
+- **Account matching** by PGC prefix (e.g. `472` matches `47200001`) — tests accounting knowledge, not code memorisation
+- **Balance check** — Σdebit = Σcredit ±€0.01
+- **Semantic flags** — exact match on `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
+- **Brake pattern** — model must return `PENDIENTE_VERIFICACION` (empty entry) when essential data is missing
+
+### AI Bias Mitigation
+
+Six cognitive biases were addressed through prompt engineering:
+
+| Bias | Fix |
+|------|-----|
+| **Recency** | Pre-flight question as last instruction before input |
+| **Confirmation** | 8-step checklist resets the "produce output" frame |
+| **Anchoring** | Explicit rules for cases where the obvious account is wrong |
+| **False balance** | Binary decision criteria, no hedging allowed |
+| **Sycophancy** | Trap cases (43–46) require refusing user-provided wrong entries |
+| **Cherry picking** | Pre-flight distinguishes derivable data from required data |
+
+### Quick Start
+
+```bash
+git clone https://github.com/jleonceo/llm-eval-contable.git
+cd llm-eval-contable
+pip install -r requirements.txt
+cp .env.example .env          # add your ANTHROPIC_API_KEY
+cp skill_prompt.example.md skill_prompt.md   # add your system prompt
+python runner.py
+```
 
 ---
 
-*Built with Claude Sonnet 4.6 · May 2026*
+## Licencia / License
+
+MIT — see [LICENSE](LICENSE).
+
+---
+
+*Construido con Claude Sonnet 4.6 · Mayo 2026 · Built with Claude Sonnet 4.6 · May 2026*

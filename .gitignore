@@ -1,10 +1,12 @@
-# Environment
+# Variables de entorno / Environment
 .env
 
-# Skill prompt — proprietary system prompt, not included in repo
+# Skill prompt — system prompt propietario, no incluido en el repo
+# Proprietary system prompt, not included in repo
 skill_prompt.md
 
-# Raw eval results (JSON) — too large and contains full API responses
+# Resultados raw del eval (JSON) — demasiado grandes y contienen respuestas completas de la API
+# Raw eval results (JSON) — too large and contain full API responses
 results/*.json
 
 # Python
