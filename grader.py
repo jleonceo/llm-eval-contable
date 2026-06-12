@@ -184,11 +184,11 @@ def grade_all(results) -> list[dict]:
 def list_results():
     results_dir = Path(__file__).parent / "results"
     if not results_dir.exists():
-        print("No hay resultados todavia. Corre: python runner.py")
+        print("No hay resultados todavia. Ejecuta: python runner.py")
         return
     files = sorted(results_dir.glob("*.json"))
     if not files:
-        print("No hay resultados todavia. Corre: python runner.py")
+        print("No hay resultados todavia. Ejecuta: python runner.py")
         return
     print("Resultados disponibles:")
     for f in files:
