@@ -17,11 +17,10 @@
 | 3 | 2026-05-26 | 38 / 50 | 76% | v2.0 | Lógica de freno, nóminas 465 / Brake logic, payroll 465 |
 | 4 | 2026-05-27 | 41 / 50 | 82% | v2.2 | Activación leasing, periodificación / Leasing activation |
 | 5 | 2026-05-27 | 44 / 50 | 88% | v2.6 | Excepción SaaS, 640 vs 641, embargo / Garnishments |
-| **Teórico v2.8 / Theoretical** | 2026-05-27 | **47 / 50** | **94%** | v2.8 | Correcciones dataset + aclaración devengo / Dataset fixes + accrual |
+| **6 — final** | 2026-05-28 | **50 / 50** | **100%** | v3.0 | Correcciones dataset + ejemplos F y G (periodificación pasiva, traspaso a reservas) / Dataset fixes + examples F & G |
 
-*Puntuación teórica verificada por análisis manual de casos tras aplicar todas las correcciones v2.8.*
-*Theoretical score manually verified by case analysis after applying all v2.8 fixes.*
-*Run 6 pendiente para confirmar en práctica / Run 6 pending to confirm in practice.*
+*Run 6 ejecutado y verificado — resultado completo en `2026-05-28_1654_sonnet.json` (este directorio), re-puntuable con `grader.py`.*
+*Run 6 executed and verified — full result in `2026-05-28_1654_sonnet.json` (this folder), re-scorable with `grader.py`.*
 
 ---
 
@@ -52,8 +51,8 @@
 | 30 | amortizaciones | Pre-vuelo demasiado agresivo → falso freno en amortización de ERP / Pre-flight too aggressive → false brake on ERP amortisation | Pregunta de pre-vuelo refinada para distinguir datos derivables vs datos imprescindibles / Refined pre-flight to distinguish derivable vs truly missing data | ✅ Resuelto / Fixed v2.8 |
 | 33 | periodificaciones | Error en dataset: `requiere_periodificacion: true` era incorrecto (devengo del mes corriente ≠ periodificación) / Dataset error: current-month accrual ≠ periodificación | Cambiado a `false` en dataset / Changed to `false` in dataset | ✅ Resuelto / Fixed v2.8 |
 | 49 | leasing_renting | Pre-vuelo bloqueaba pago de cuota de leasing (524 CP, no 174 LP) / Pre-flight blocked leasing payment | Aclaración en skill + refinamiento pre-vuelo / Skill clarification + pre-flight refinement | ✅ Resuelto / Fixed v2.8 |
-| 34 | cierre_regularizacion | Prefijo demasiado estricto en dataset (`300`, `610` en lugar de `30`, `61`) / Overly strict prefix in dataset | Relajado a 2 dígitos / Relaxed to 2-digit prefix | ⚠️ Parcial / Partially addressed |
-| — | — | Dos casos edge adicionales en investigación / Two further edge cases under investigation | — | 🔄 Pendiente / Pending run 6 |
+| 34 | cierre_regularizacion | Prefijo demasiado estricto en dataset (`300`, `610` en lugar de `30`, `61`) / Overly strict prefix in dataset | Relajado a 2 dígitos / Relaxed to 2-digit prefix | ✅ Resuelto / Fixed (run 6) |
+| — | — | Dos casos edge adicionales (periodificación pasiva, traspaso a reservas) / Two further edge cases | Ejemplos F y G añadidos a la skill (v3.0) / Examples F & G added to the skill | ✅ Resuelto / Fixed (run 6: 50/50) |
 
 ---
 
@@ -77,4 +76,4 @@
 
 ---
 
-*Última actualización / Last updated: 2026-05-27*
+*Última actualización / Last updated: 2026-06-12 (publicación del Run 6 ejecutado el 2026-05-28 / publishing Run 6 executed on 2026-05-28)*

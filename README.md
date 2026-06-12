@@ -3,8 +3,8 @@
 **Framework de evaluación automática para una skill contable en LLM**
 *Automated evaluation framework for a Spanish PGC accounting LLM skill*
 
-> 50 casos de test · 12 categorías · 5 iteraciones · **66% → 94% de precisión** · Mitigación de sesgos cognitivos en IA
-> *50 test cases · 12 categories · 5 iterations · **66% → 94% accuracy** · AI cognitive bias mitigation*
+> 50 casos de test · 12 categorías · 6 iteraciones · **66% → 100% medido** · Mitigación de sesgos cognitivos en IA
+> *50 test cases · 12 categories · 6 iterations · **66% → 100% measured** · AI cognitive bias mitigation*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-green.svg)](https://www.python.org/)
@@ -27,6 +27,16 @@ Un pipeline de **desarrollo orientado a evaluación** para medir y mejorar itera
 
 ---
 
+### Si esto te pilla de nuevo: ¿qué es una skill y por qué examinarla?
+
+Imagina que contratas a un especialista. El primer día le das un manual con cómo se trabaja en tu casa: tus reglas, tus casos especiales, los errores que no puede cometer y el formato en el que entrega. Eso es una **skill**: el manual de instrucciones que convierte una IA genérica en un especialista de tu tarea concreta.
+
+El problema viene después, y casi nadie habla de él: **¿cómo sabes que tu especialista hace bien su trabajo?** Una IA siempre responde con seguridad — acierte o no. Si le pides un asiento contable, te lo da; que sea correcto es otra historia. Fiarse de la sensación ("parece que va bien") es la receta para llevarse sorpresas justo donde más duele.
+
+Este repositorio resuelve eso con la herramienta más vieja del mundo: **un examen**. 50 casos con su respuesta correcta conocida, un corrector automático que puntúa sin piedad, y una regla de oro — cuando un caso falla, se corrige la skill y se repite el examen *entero*, para comprobar que el arreglo no ha roto lo que ya funcionaba. La skill pasó de aprobar el 66% del examen a aprobarlo entero. No porque la IA mejorase: porque el manual mejoró, medido fallo a fallo.
+
+---
+
 ### Progresión de resultados
 
 | Run | Puntuación | % | Versión skill | Cambio principal |
@@ -35,9 +45,11 @@ Un pipeline de **desarrollo orientado a evaluación** para medir y mejorar itera
 | Runs 2–3 | 36–38 / 50 | 72–76% | v1.5–v2.0 | Taxonomía IVA, reglas ISP |
 | Run 4 | 41 / 50 | 82% | v2.2 | Freno, asientos de nómina |
 | Run 5 | 44 / 50 | 88% | v2.6 | Excepción SaaS, 640 vs 641, embargo |
-| **Teórico (v2.8)** | **47 / 50** | **94%** | v2.8 | Correcciones dataset + aclaración devengo |
+| **Run 6 — final** | **50 / 50** | **100%** | v3.0 | Correcciones dataset + periodificación pasiva y traspaso a reservas (ejemplos F y G) |
 
-*Puntuación teórica verificada manualmente por análisis de casos tras aplicar todas las correcciones v2.8.*
+*Run 6 ejecutado el 28/05/2026. El resultado completo está en [`results/2026-05-28_1654_sonnet.json`](results/2026-05-28_1654_sonnet.json) — re-puntuable con `grader.py`.*
+
+*Matiz honesto: el 100% es sobre **este** examen de 50 casos. No significa que la skill sea infalible — significa que ya no falla ninguno de los patrones que el examen cubre. Ampliar el examen es la forma de volver a encontrar fallos.*
 
 ---
 
@@ -235,6 +247,14 @@ Ver [`results/summary.md`](results/summary.md) para el análisis completo con de
 
 ---
 
+### Qué pasó después — el capítulo 2
+
+Este proyecto fue el primer paso de algo más grande. El método que ves aquí (examen con respuestas conocidas → medir → corregir la causa raíz → re-examinar todo) escaló después a un **enjambre de 3 agentes** que procesa documentos contables reales de extremo a extremo — con un banco de pruebas de 128 casos generados desde la propia base de datos y puertas de no-regresión.
+
+→ [**accounting-agent-swarm**](https://github.com/jleonceo/accounting-agent-swarm)
+
+---
+
 ### Autor
 
 **Juan Luis León Rodríguez**
@@ -263,7 +283,11 @@ An eval-driven development pipeline to test and iteratively improve an LLM-based
 | Runs 2–3 | 36–38 / 50 | 72–76% | VAT taxonomy, ISP rules |
 | Run 4 | 41 / 50 | 82% | Brake logic, payroll edge cases |
 | Run 5 | 44 / 50 | 88% | SaaS exception, 640 vs 641, garnishments |
-| **Theoretical (v2.8)** | **47 / 50** | **94%** | Dataset fixes + accrual clarification |
+| **Run 6 — final** | **50 / 50** | **100%** | Dataset fixes + passive accruals & reserves transfer (examples F & G) |
+
+*Run 6 executed on 2026-05-28. Full result in [`results/2026-05-28_1654_sonnet.json`](results/2026-05-28_1654_sonnet.json) — re-scorable with `grader.py`. Honest caveat: 100% means the skill no longer fails any pattern this 50-case exam covers — not that it is infallible. Growing the exam is how you find new failures.*
+
+**What happened next:** this method later scaled into a 3-agent swarm processing real accounting documents end-to-end → [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm).
 
 ### How It Works
 
