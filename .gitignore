@@ -8,6 +8,8 @@ skill_prompt.md
 # Resultados raw del eval (JSON) — demasiado grandes y contienen respuestas completas de la API
 # Raw eval results (JSON) — too large and contain full API responses
 results/*.json
+# Excepción: el resultado del 100% que el README enlaza y grader.py re-puntúa (sintético, sin prompt propietario)
+!results/2026-05-28_1654_sonnet.json
 
 # Python
 __pycache__/
