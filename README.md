@@ -1,4 +1,4 @@
-# LLM Eval — Contable Experto
+# LLM Eval, Contable Experto
 
 **Framework de evaluación automática para una skill contable en LLM**
 *Automated evaluation framework for a Spanish PGC accounting LLM skill*
@@ -12,28 +12,28 @@
 
 ---
 
-🇪🇸 [Español](#español) · 🇬🇧 [English](#english)
+ [Español](#español) ·  [English](#english)
 
 ---
 
 <a name="español"></a>
-## 🇪🇸 Español
+## Español
 
 ### Qué es esto
 
-Un pipeline de **desarrollo orientado a evaluación** para medir y mejorar iterativamente una skill LLM de contabilidad. La skill bajo test genera asientos contables de doble entrada (PGC — *Plan General Contable* español) a partir de descripciones en lenguaje natural.
+Un pipeline de **desarrollo orientado a evaluación** para medir y mejorar iterativamente una skill LLM de contabilidad. La skill bajo test genera asientos contables de doble entrada (PGC, *Plan General Contable* español) a partir de descripciones en lenguaje natural.
 
-**La idea central:** mejorar una skill de LLM no es cuestión de escribir más instrucciones — es medir los patrones de fallo de forma sistemática, corregir la causa raíz, y verificar que las correcciones no rompen los casos que ya pasaban (regresión).
+**La idea central:** mejorar una skill de LLM no es cuestión de escribir más instrucciones, es medir los patrones de fallo de forma sistemática, corregir la causa raíz, y verificar que las correcciones no rompen los casos que ya pasaban (regresión).
 
 ---
 
-### Si esto te pilla de nuevo: ¿qué es una skill y por qué examinarla?
+### Si empiezas de cero: ¿qué es una skill y por qué examinarla?
 
 Imagina que contratas a un especialista. El primer día le das un manual con cómo se trabaja en tu casa: tus reglas, tus casos especiales, los errores que no puede cometer y el formato en el que entrega. Eso es una **skill**: el manual de instrucciones que convierte una IA genérica en un especialista de tu tarea concreta.
 
-El problema viene después, y casi nadie habla de él: **¿cómo sabes que tu especialista hace bien su trabajo?** Una IA siempre responde con seguridad — acierte o no. Si le pides un asiento contable, te lo da; que sea correcto es otra historia. Fiarse de la sensación ("parece que va bien") es la receta para llevarse sorpresas justo donde más duele.
+El problema viene después, y casi nadie habla de él: **¿cómo sabes que tu especialista hace bien su trabajo?** Una IA siempre responde con seguridad, acierte o no. Si le pides un asiento contable, te lo da; que sea correcto es otra historia. Fiarse de la sensación ("parece que va bien") es la receta para llevarse sorpresas justo donde más duele.
 
-Este repositorio resuelve eso con la herramienta más vieja del mundo: **un examen**. 50 casos con su respuesta correcta conocida, un corrector automático que puntúa sin piedad, y una regla de oro — cuando un caso falla, se corrige la skill y se repite el examen *entero*, para comprobar que el arreglo no ha roto lo que ya funcionaba. La skill pasó de aprobar el 66% del examen a aprobarlo entero. No porque la IA mejorase: porque el manual mejoró, medido fallo a fallo.
+Este repositorio resuelve eso con la herramienta más vieja del mundo: **un examen**. 50 casos con su respuesta correcta conocida, un corrector automático que puntúa sin piedad, y una regla de oro, cuando un caso falla, se corrige la skill y se repite el examen *entero*, para comprobar que el arreglo no ha roto lo que ya funcionaba. La skill pasó de aprobar el 66% del examen a aprobarlo entero. No porque la IA mejorase: porque el manual mejoró, medido fallo a fallo.
 
 ---
 
@@ -41,19 +41,19 @@ Este repositorio resuelve eso con la herramienta más vieja del mundo: **un exam
 
 | Run | Puntuación | % | Versión skill | Cambio principal |
 |-----|-----------|---|---------------|-----------------|
-| Run 1 — baseline | 33 / 50 | 66% | v1.0 | Skill inicial |
-| Runs 2–3 | 36–38 / 50 | 72–76% | v1.5–v2.0 | Taxonomía IVA, reglas ISP |
+| Run 1, baseline | 33 / 50 | 66% | v1.0 | Skill inicial |
+| Runs 2-3 | 36-38 / 50 | 72-76% | v1.5-v2.0 | Taxonomía IVA, reglas ISP |
 | Run 4 | 41 / 50 | 82% | v2.2 | Freno, asientos de nómina |
 | Run 5 | 44 / 50 | 88% | v2.6 | Excepción SaaS, 640 vs 641, embargo |
-| **Run 6 — final** | **50 / 50** | **100%** | v3.0 | Correcciones dataset + periodificación pasiva y traspaso a reservas (ejemplos F y G) |
+| **Run 6, final** | **50 / 50** | **100%** | v3.0 | Correcciones dataset + periodificación pasiva y traspaso a reservas (ejemplos F y G) |
 
-*Run 6 ejecutado el 28/05/2026. El resultado completo está en [`results/2026-05-28_1654_sonnet.json`](results/2026-05-28_1654_sonnet.json) — re-puntuable con `grader.py`.*
+*Run 6 ejecutado el 28/05/2026. El resultado completo está en [`results/2026-05-28_1654_sonnet.json`](results/2026-05-28_1654_sonnet.json), re-puntuable con `grader.py`.*
 
-*Matiz honesto: el 100% es sobre **este** examen de 50 casos. No significa que la skill sea infalible — significa que ya no falla ninguno de los patrones que el examen cubre. Ampliar el examen es la forma de volver a encontrar fallos.*
+*Matiz honesto: el 100% es sobre **este** examen de 50 casos. No significa que la skill sea infalible, significa que ya no falla ninguno de los patrones que el examen cubre. Ampliar el examen es la forma de volver a encontrar fallos.*
 
 ---
 
-### Cobertura — 50 casos, 12 categorías
+### Cobertura, 50 casos, 12 categorías
 
 | Categoría | Casos | Qué testea |
 |---------|-------|------------|
@@ -96,10 +96,10 @@ grader.py  ──────────────── valida: coincidencia
 
 #### Qué verifica el grader
 
-1. **Estado** — OK vs PENDIENTE_VERIFICACION (freno obligatorio cuando faltan datos)
-2. **Cuadre** — total DEBE debe igualar total HABER (±€0,01)
-3. **Líneas del asiento** — cada línea esperada debe coincidir por **prefijo PGC** (no código exacto), importe y lado (debe/haber)
-4. **Flags semánticos** — `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
+1. **Estado**, OK vs PENDIENTE_VERIFICACION (freno obligatorio cuando faltan datos)
+2. **Cuadre**, total DEBE debe igualar total HABER (±€0,01)
+3. **Líneas del asiento**, cada línea esperada debe coincidir por **prefijo PGC** (no código exacto), importe y lado (debe/haber)
+4. **Flags semánticos**, `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
 
 La validación por prefijo (`startswith`) es clave: la skill usa códigos de 8 dígitos específicos de empresa (ej. `47200001`), pero el test solo exige el grupo PGC correcto (ej. `472`). Esto testea el conocimiento contable, no la memorización de códigos.
 
@@ -112,7 +112,7 @@ La parte más interesante del proyecto fue aplicar **teoría de sesgos cognitivo
 #### 1. Sesgo de recencia
 *Problema:* el último "pensamiento" del modelo antes de generar output ancla la respuesta. Si el contexto más reciente es un ejemplo positivo, el modelo se vuelve permisivo.
 
-*Solución:* se añadió una **pregunta de pre-vuelo** como última instrucción antes del input — forzando al modelo a verificar si faltan datos críticos (% IRPF, cuota SS empresa) antes de escribir ningún JSON.
+*Solución:* se añadió una **pregunta de pre-vuelo** como última instrucción antes del input, forzando al modelo a verificar si faltan datos críticos (% IRPF, cuota SS empresa) antes de escribir ningún JSON.
 
 #### 2. Sesgo de confirmación
 *Problema:* el modelo confirma el marco establecido por la pregunta. "Contabiliza esta factura..." lo predispone a producir un asiento aunque los datos sean insuficientes.
@@ -125,14 +125,14 @@ La parte más interesante del proyecto fue aplicar **teoría de sesgos cognitivo
 *Solución:* reglas explícitas para categorías donde la cuenta "obvia" es incorrecta (suscripciones SaaS → 62x no 20x, devengo nómina → 465 no 572).
 
 #### 4. Falso equilibrio
-*Problema:* cuando existen dos tratamientos contables posibles, el modelo elige el "término medio" — produciendo un asiento híbrido incorrecto bajo ambos criterios.
+*Problema:* cuando existen dos tratamientos contables posibles, el modelo elige el "término medio", produciendo un asiento híbrido incorrecto bajo ambos criterios.
 
-*Solución:* reglas binarias con criterios de decisión explícitos. Sin "podría ser cualquiera de los dos" — el prompt fuerza una decisión basada en condiciones concretas.
+*Solución:* reglas binarias con criterios de decisión explícitos. Sin "podría ser cualquiera de los dos", el prompt fuerza una decisión basada en condiciones concretas.
 
 #### 5. Servilismo (*sycophancy*)
 *Problema:* cuando el input del usuario implica un resultado esperado (ej. "haz este asiento: DEBE 600 / HABER 400"), el modelo cumple aunque sea incorrecto (descuadrado).
 
-*Solución:* **casos trampa** en el dataset (casos 43–46) donde la respuesta correcta es rechazar y devolver PENDIENTE_VERIFICACION.
+*Solución:* **casos trampa** en el dataset (casos 43-46) donde la respuesta correcta es rechazar y devolver PENDIENTE_VERIFICACION.
 
 #### 6. *Cherry picking*
 *Problema:* el modelo selecciona la interpretación más favorable de datos ambiguos en lugar de señalar la ambigüedad.
@@ -214,7 +214,7 @@ llm-eval-contable/
 ├── dataset_v2.json             ← 50 casos de test con expected outputs
 ├── grader.py                   ← lógica de evaluación y puntuación
 ├── runner.py                   ← runner API (carga skill_prompt.md)
-├── skill_prompt.md             ← tu system prompt (NO incluido — ver .gitignore)
+├── skill_prompt.md             ← tu system prompt (NO incluido, ver .gitignore)
 ├── skill_prompt.example.md     ← plantilla con la estructura requerida
 ├── requirements.txt
 ├── .env.example
@@ -237,7 +237,7 @@ Reproducibilidad. Con temperature > 0, el mismo caso puede pasar o fallar entre 
 El output estructurado permite evaluación automática. Las explicaciones contables en texto libre son útiles para humanos pero imposibles de evaluar a escala. El formato JSON además obliga al modelo a ser preciso con los importes.
 
 **¿Por qué un freno obligatorio (PENDIENTE_VERIFICACION)?**
-Un asiento incorrecto en un sistema contable es peor que ningún asiento. El patrón freno — rechazar y explicar en lugar de adivinar — es el comportamiento correcto para un asistente contable en producción.
+Un asiento incorrecto en un sistema contable es peor que ningún asiento. El patrón freno, rechazar y explicar en lugar de adivinar, es el comportamiento correcto para un asistente contable en producción.
 
 ---
 
@@ -247,11 +247,24 @@ Ver [`results/summary.md`](results/summary.md) para el análisis completo con de
 
 ---
 
-### Qué pasó después — el capítulo 2
+### Qué pasó después, el capítulo 2
 
-Este proyecto fue el primer paso de algo más grande. El método que ves aquí (examen con respuestas conocidas → medir → corregir la causa raíz → re-examinar todo) escaló después a un **enjambre de 3 agentes** que procesa documentos contables reales de extremo a extremo — con un banco de pruebas de 128 casos generados desde la propia base de datos y puertas de no-regresión.
+Este proyecto fue el primer paso de algo más grande. El método que ves aquí (examen con respuestas conocidas → medir → corregir la causa raíz → re-examinar todo) escaló después a un **enjambre de 3 agentes** que procesa documentos contables reales de extremo a extremo, con un banco de pruebas de 128 casos generados desde la propia base de datos y puertas de no-regresión.
 
 → [**accounting-agent-swarm**](https://github.com/jleonceo/accounting-agent-swarm)
+
+---
+
+### Repos relacionados
+
+Este examen es una pieza de un trabajo más amplio: sistemas con varios agentes de IA en los que se puede confiar. Las piezas hermanas, de lo básico a lo avanzado:
+
+- [tu-primer-asistente-ia-web](https://github.com/jleonceo/tu-primer-asistente-ia-web): qué es un asistente de IA y cómo se le instruye, para quien empieza de cero.
+- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): el enjambre de agentes que creció de este examen, con sus caídas explicadas.
+- [orquestacion-enjambres-ia](https://github.com/jleonceo/orquestacion-enjambres-ia): con muchos agentes, cómo se enruta cada petición y se prueba que no rompe al crecer.
+- [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): gobernar skills con golden sets, puertas de no-regresión y verificador.
+- [verificacion-determinista-ia](https://github.com/jleonceo/verificacion-determinista-ia): comprobar la coherencia del estado por pura aritmética, sin IA.
+- [agent-memory-governance](https://github.com/jleonceo/agent-memory-governance): que la memoria del agente no acabe siendo un vertedero.
 
 ---
 
@@ -260,42 +273,42 @@ Este proyecto fue el primer paso de algo más grande. El método que ves aquí (
 **Juan Luis León Rodríguez**
 Analista de Datos · Business Intelligence · IA Aplicada al Negocio
 
-- 💼 [LinkedIn](https://linkedin.com/in/jlleonrodriguez/)
-- 🐙 [GitHub](https://github.com/jleonceo)
-- 🌐 [Portfolio](https://juanluisleon.vercel.app)
+-  [LinkedIn](https://linkedin.com/in/jlleonrodriguez/)
+-  [GitHub](https://github.com/jleonceo)
+-  [Portfolio](https://juanluisleon.vercel.app)
 
 ---
 
 <a name="english"></a>
-## 🇬🇧 English
+## English
 
 ### What This Is
 
-An eval-driven development pipeline to test and iteratively improve an LLM-based accounting assistant. The skill under test generates Spanish double-entry bookkeeping entries (PGC — *Plan General Contable*) from natural language descriptions.
+An eval-driven development pipeline to test and iteratively improve an LLM-based accounting assistant. The skill under test generates Spanish double-entry bookkeeping entries (PGC, *Plan General Contable*) from natural language descriptions.
 
-**The core insight:** improving an LLM skill is not about writing more instructions — it's about measuring failure patterns systematically, fixing the root cause, and verifying fixes don't break passing cases (regression testing).
+**The core insight:** improving an LLM skill is not about writing more instructions, it's about measuring failure patterns systematically, fixing the root cause, and verifying fixes don't break passing cases (regression testing).
 
 ### Score Progression
 
 | Run | Score | % | Key change |
 |-----|-------|---|------------|
-| Run 1 — baseline | 33 / 50 | 66% | Initial skill |
-| Runs 2–3 | 36–38 / 50 | 72–76% | VAT taxonomy, ISP rules |
+| Run 1, baseline | 33 / 50 | 66% | Initial skill |
+| Runs 2-3 | 36-38 / 50 | 72-76% | VAT taxonomy, ISP rules |
 | Run 4 | 41 / 50 | 82% | Brake logic, payroll edge cases |
 | Run 5 | 44 / 50 | 88% | SaaS exception, 640 vs 641, garnishments |
-| **Run 6 — final** | **50 / 50** | **100%** | Dataset fixes + passive accruals & reserves transfer (examples F & G) |
+| **Run 6, final** | **50 / 50** | **100%** | Dataset fixes + passive accruals & reserves transfer (examples F & G) |
 
-*Run 6 executed on 2026-05-28. Full result in [`results/2026-05-28_1654_sonnet.json`](results/2026-05-28_1654_sonnet.json) — re-scorable with `grader.py`. Honest caveat: 100% means the skill no longer fails any pattern this 50-case exam covers — not that it is infallible. Growing the exam is how you find new failures.*
+*Run 6 executed on 2026-05-28. Full result in [`results/2026-05-28_1654_sonnet.json`](results/2026-05-28_1654_sonnet.json), re-scorable with `grader.py`. Honest caveat: 100% means the skill no longer fails any pattern this 50-case exam covers, not that it is infallible. Growing the exam is how you find new failures.*
 
 **What happened next:** this method later scaled into a 3-agent swarm processing real accounting documents end-to-end → [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm).
 
 ### How It Works
 
 The grader validates each model response against the dataset expected output:
-- **Account matching** by PGC prefix (e.g. `472` matches `47200001`) — tests accounting knowledge, not code memorisation
-- **Balance check** — Σdebit = Σcredit ±€0.01
-- **Semantic flags** — exact match on `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
-- **Brake pattern** — model must return `PENDIENTE_VERIFICACION` (empty entry) when essential data is missing
+- **Account matching** by PGC prefix (e.g. `472` matches `47200001`), tests accounting knowledge, not code memorisation
+- **Balance check**, Σdebit = Σcredit ±€0.01
+- **Semantic flags**, exact match on `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
+- **Brake pattern**, model must return `PENDIENTE_VERIFICACION` (empty entry) when essential data is missing
 
 ### AI Bias Mitigation
 
@@ -307,7 +320,7 @@ Six cognitive biases were addressed through prompt engineering:
 | **Confirmation** | 8-step checklist resets the "produce output" frame |
 | **Anchoring** | Explicit rules for cases where the obvious account is wrong |
 | **False balance** | Binary decision criteria, no hedging allowed |
-| **Sycophancy** | Trap cases (43–46) require refusing user-provided wrong entries |
+| **Sycophancy** | Trap cases (43-46) require refusing user-provided wrong entries |
 | **Cherry picking** | Pre-flight distinguishes derivable data from required data |
 
 ### Quick Start
@@ -321,11 +334,22 @@ cp skill_prompt.example.md skill_prompt.md   # add your system prompt
 python runner.py
 ```
 
+### Related repos
+
+This exam is one piece of a larger effort: multi-agent AI systems you can actually trust. The sibling repos, from the basics upward:
+
+- [tu-primer-asistente-ia-web](https://github.com/jleonceo/tu-primer-asistente-ia-web): what an AI assistant is and how you instruct it, for absolute beginners.
+- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): the agent swarm that grew from this exam, with its drops explained.
+- [orquestacion-enjambres-ia](https://github.com/jleonceo/orquestacion-enjambres-ia): with many agents, how each request is routed and how routing is proven to survive growth.
+- [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): governing skills with golden sets, no-regression gates and a verifier.
+- [verificacion-determinista-ia](https://github.com/jleonceo/verificacion-determinista-ia): checking state coherence by pure arithmetic, without AI.
+- [agent-memory-governance](https://github.com/jleonceo/agent-memory-governance): keeping the agent's memory from rotting into a junkyard.
+
 ---
 
 ## Licencia / License
 
-MIT — see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
 
 ---
 
