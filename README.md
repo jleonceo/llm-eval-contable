@@ -180,7 +180,7 @@ python runner.py --model opus
 python runner.py --model haiku
 
 # Evaluar un resultado existente
-python grader.py results/2026-05-27_1200_sonnet.json
+python grader.py results/2026-05-28_1654_sonnet.json
 ```
 
 #### Adaptar para tu propia skill
@@ -249,7 +249,7 @@ Ver [`results/summary.md`](results/summary.md) para el análisis completo con de
 
 ### Qué pasó después, el capítulo 2
 
-Este proyecto fue el primer paso de algo más grande. El método que ves aquí (examen con respuestas conocidas → medir → corregir la causa raíz → re-examinar todo) escaló después a un **enjambre de 3 agentes** que procesa documentos contables reales de extremo a extremo, con un banco de pruebas de 128 casos generados desde la propia base de datos y puertas de no-regresión.
+Este proyecto fue el primer paso de algo más grande. El método que ves aquí (examen con respuestas conocidas → medir → corregir la causa raíz → re-examinar todo) escaló después a un **enjambre de 4 agentes** que procesa documentos contables reales de extremo a extremo, con un banco de pruebas de 128 casos generados desde la propia base de datos y puertas de no-regresión.
 
 → [**accounting-agent-swarm**](https://github.com/jleonceo/accounting-agent-swarm)
 
@@ -302,7 +302,7 @@ An eval-driven development pipeline to test and iteratively improve an LLM-based
 
 *Run 6 executed on 2026-05-28. Full result in [`results/2026-05-28_1654_sonnet.json`](results/2026-05-28_1654_sonnet.json), re-scorable with `grader.py`. Honest caveat: 100% means the skill no longer fails any pattern this 50-case exam covers, not that it is infallible. Growing the exam is how you find new failures.*
 
-**What happened next:** this method later scaled into a 3-agent swarm processing real accounting documents end-to-end → [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm).
+**What happened next:** this method later scaled into a 4-agent swarm processing real accounting documents end-to-end → [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm).
 
 ### How It Works
 
