@@ -261,6 +261,7 @@ Este examen es una pieza de un trabajo más amplio: sistemas con varios agentes 
 
 - [tu-primer-asistente-ia-web](https://github.com/jleonceo/tu-primer-asistente-ia-web): qué es un asistente de IA y cómo se le instruye, para quien empieza de cero.
 - [tesoreria-forecast-ia](https://github.com/jleonceo/tesoreria-forecast-ia): previsión de caja por descomposición con backtesting, más ratios y aging.
+- [control-interno-fraude-ia](https://github.com/jleonceo/control-interno-fraude-ia): detección de fraude contable con aritmética, dentro de un marco de control interno.
 - [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): el enjambre de agentes que creció de este examen, con sus caídas explicadas.
 - [orquestacion-enjambres-ia](https://github.com/jleonceo/orquestacion-enjambres-ia): con muchos agentes, cómo se enruta cada petición y se prueba que no rompe al crecer.
 - [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): gobernar skills con golden sets, puertas de no-regresión y verificador.
@@ -341,6 +342,7 @@ This exam is one piece of a larger effort: multi-agent AI systems you can actual
 
 - [tu-primer-asistente-ia-web](https://github.com/jleonceo/tu-primer-asistente-ia-web): what an AI assistant is and how you instruct it, for absolute beginners.
 - [tesoreria-forecast-ia](https://github.com/jleonceo/tesoreria-forecast-ia): cash-flow forecasting by decomposition with backtesting, plus ratios and aging.
+- [control-interno-fraude-ia](https://github.com/jleonceo/control-interno-fraude-ia): accounting fraud detection with arithmetic, inside an internal-control framework.
 - [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): the agent swarm that grew from this exam, with its drops explained.
 - [orquestacion-enjambres-ia](https://github.com/jleonceo/orquestacion-enjambres-ia): with many agents, how each request is routed and how routing is proven to survive growth.
 - [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): governing skills with golden sets, no-regression gates and a verifier.
