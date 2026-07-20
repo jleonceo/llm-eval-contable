@@ -72,6 +72,21 @@ Este repositorio resuelve eso con la herramienta más vieja del mundo: **un exam
 > anterior. Hasta que se repita la serie completa, léela como historia del proceso, no como
 > el resultado vigente.
 >
+> **El caso 20 tenía el mismo problema, y uno peor encima.** Planteaba una reforma de mejora de
+> 5.000 € como inversión del sujeto pasivo. La letra f) del art. 84.Uno.2º solo alcanza a
+> urbanización, construcción o **rehabilitación**, y "rehabilitación" es un concepto tasado
+> (art. 20.Uno.22º.B): exige que más del 50 % del coste sea obra estructural **y** que el total
+> supere el 25 % del valor del inmueble neto de suelo. Para que 5.000 € superaran ese 25 %, el
+> local tendría que valer menos de 20.000 €.
+>
+> Lo peor no era el error de fondo: **el enunciado dictaba la respuesta**. Decía literalmente
+> *"aplica ISP obligatorio (art. 84.1.2.f LIVA)"* dentro del input. Así el caso no medía si el
+> modelo conoce la norma, medía si obedece una premisa falsa que se le entrega. Reescrito para
+> dar los hechos —tipo de obra, valor del local— y que el modelo tenga que decidir.
+>
+> Comprobado tras la corrección: los 50 casos cuadran (debe = haber) y **ningún enunciado dicta
+> ya su propia respuesta**.
+>
 > Y el fallo de fondo que esto enseña, que es más útil que el caso: un examen puede estar
 > **internamente consistente y externamente equivocado**. El corrector cuadraba, los importes
 > cuadraban, el asiento cuadraba — y premiaba una respuesta que la ley no admite. Lo cazó

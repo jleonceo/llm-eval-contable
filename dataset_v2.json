@@ -718,8 +718,8 @@
     {
       "id": 20,
       "categoria": "isp_domestico",
-      "descripcion": "ISP doméstico — ejecución de obra en local comercial (art. 84.1.2.f LIVA)",
-      "input": "Recibimos factura de Reformas Barna SL (empresa española, PR40000009) por reforma de mejora del local comercial de TechAcces: 5.000,00 € sin IVA en la factura. Es ejecución de obra donde TechAcces es promotor empresario — aplica ISP obligatorio (art. 84.1.2.f LIVA). La mejora se activa como inmovilizado material (construcciones). Pago pendiente.",
+      "descripcion": "Trampa ISP domestica: reforma de mejora que NO alcanza el umbral de rehabilitacion del art. 20.Uno.22.B LIVA -> IVA 21% ordinario, NO hay inversion del sujeto pasivo",
+      "input": "Recibimos factura de Reformas Barna SL (empresa espanola, PR40000009) por una reforma de mejora del local comercial: base imponible 5.000,00 EUR mas IVA 21% (1.050,00 EUR) repercutido por el contratista. Total 6.050,00 EUR, pago pendiente. La obra consiste en cambiar suelos, pintura y renovar la instalacion electrica; no toca estructura, cimentacion, fachada ni cubierta. El local se adquirio por 180.000,00 EUR (valor neto de suelo). La mejora se activa como inmovilizado.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -734,19 +734,14 @@
             "haber": 0.0
           },
           {
-            "cuenta_prefijo": "477",
-            "debe": 0.0,
-            "haber": 1050.0
-          },
-          {
             "cuenta_prefijo": "400",
             "debe": 0.0,
-            "haber": 5000.0
+            "haber": 6050.0
           }
         ],
         "flags": {
           "requiere_periodificacion": false,
-          "isp": true,
+          "isp": false,
           "freno_nominas": false,
           "retencion_irpf": false
         }
