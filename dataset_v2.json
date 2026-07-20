@@ -554,7 +554,7 @@
       "id": 15,
       "categoria": "facturas_recibidas",
       "descripcion": "Factura definitiva de proveedor con anticipo previo pendiente de aplicar",
-      "input": "Recibimos mercadería y factura definitiva de ElectroImport SA (proveedor PR40000002) por 1.500,00 € + IVA 21% (315,00 €). En su momento pagamos un anticipo de 300,00 € ya registrado en cuenta 407xxxxx. El resto pendiente de pagar al proveedor es 1.515,00 €.",
+      "input": "Recibimos mercadería y factura definitiva de ElectroImport SA (proveedor PR40000002) por 1.500,00 € + IVA 21% (315,00 €). En su momento pagamos un anticipo de 300,00 € ya registrado. El resto pendiente de pagar al proveedor es 1.515,00 €.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -692,7 +692,7 @@
       "id": 19,
       "categoria": "intracomunitario",
       "descripcion": "Venta intracomunitaria B2B exenta de IVA — destinatario empresario UE",
-      "input": "Emitimos factura a cliente italiano B2B TechItalia SRL (CL43000007, VAT IT12345678901) por venta de mercadería: 800,00 €. Operación intracomunitaria exenta de IVA (art. 25 LIVA). Cobro pendiente del cliente.",
+      "input": "Emitimos factura a cliente italiano B2B TechItalia SRL (CL43000007, VAT IT12345678901, operador registrado en el VIES) por venta de mercaderia: 800,00 EUR. Cobro pendiente del cliente.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -788,7 +788,7 @@
       "id": 22,
       "categoria": "isp_domestico",
       "descripcion": "Trampa ISP — consultoría doméstica sin ISP real (servicios generales no aplican art. 84)",
-      "input": "Recibimos factura de Consultor IT SL (empresa española, PR40000011) por servicios de consultoría técnica de mayo 2026: 2.000,00 € indicando en la factura 'ISP artículo 84'. Pago domiciliado en banco. NOTA: los servicios generales de consultoría entre empresas españolas NO están incluidos en el art. 84 LIVA. La factura está mal emitida — debe llevar IVA 21% normal.",
+      "input": "Recibimos factura de Consultor IT SL (empresa espanola, PR40000011) por servicios de consultoria tecnica de mayo 2026: 2.000,00 EUR, indicando en la factura la mencion 'ISP articulo 84 LIVA'. Pago domiciliado en banco.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -941,7 +941,7 @@
       "id": 26,
       "categoria": "nominas_irpf_embargos",
       "descripcion": "Nómina con embargo judicial — 476 en dos líneas (SS trabajador / SS empresa)",
-      "input": "Nómina de mayo 2026 de Roberto Fernández (empleado EM64000007): salario bruto 1.600,00 €, retención IRPF 11% (176,00 €), cuota SS trabajador 6,35% (101,60 €), cuota SS empresa 29,90% (478,40 €), embargo judicial: 120,00 €. Líquido a empleado: 1.202,40 €. El embargo se retiene para ingresarlo al juzgado (acreedor 410xxxxx).",
+      "input": "Nómina de mayo 2026 de Roberto Fernández (empleado EM64000007): salario bruto 1.600,00 €, retención IRPF 11% (176,00 €), cuota SS trabajador 6,35% (101,60 €), cuota SS empresa 29,90% (478,40 €), embargo judicial: 120,00 €. Líquido a empleado: 1.202,40 €. El embargo se retiene para ingresarlo posteriormente al juzgado.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1090,7 +1090,7 @@
       "id": 31,
       "categoria": "periodificaciones",
       "descripcion": "Prima anual de seguro pagada por adelantado — periodificación activa (480)",
-      "input": "Pagamos prima anual de seguro de responsabilidad civil a Allianz (PR40000005): 960,00 € (exento de IVA). Periodo cubierto: junio 2026 a mayo 2027 (12 meses). Mes actual: junio 2026. Pago domiciliado en banco. Aplicar devengo estricto: solo 1 mes a gasto.",
+      "input": "Pagamos prima anual de seguro de responsabilidad civil a Allianz (PR40000005): 960,00 € (exento de IVA). Periodo cubierto: junio 2026 a mayo 2027 (12 meses). Mes actual: junio 2026. Pago domiciliado en banco.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1122,7 +1122,7 @@
       "id": 32,
       "categoria": "periodificaciones",
       "descripcion": "Ingreso cobrado por adelantado — periodificación pasiva (485)",
-      "input": "Cobramos por adelantado a TechWorld (cliente CL43000003) por servicio de mantenimiento anual: 1.800,00 € + IVA 21% (378,00 €). Total cobrado en banco: 2.178,00 €. Periodo cubierto: julio 2026 a junio 2027 (12 meses). Mes actual: julio 2026. Aplicar devengo: solo 1 mes a ingreso, el resto a ingresos anticipados.",
+      "input": "Cobramos por adelantado a TechWorld (cliente CL43000003) por servicio de mantenimiento anual: 1.800,00 EUR + IVA 21% (378,00 EUR). Total cobrado en banco: 2.178,00 EUR. Periodo cubierto: julio 2026 a junio 2027 (12 meses). Mes actual: julio 2026.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1213,7 +1213,7 @@
       "id": 35,
       "categoria": "cierre_regularizacion",
       "descripcion": "Dotación de deterioro de crédito — cliente moroso con indicios de insolvencia",
-      "input": "El cliente InsolventShop SL (CL43000015) lleva más de 6 meses sin pagar y hay indicios claros de insolvencia. Saldo pendiente total: 2.420,00 € (base 2.000,00 € + IVA 420,00 €). Dotamos deterioro sobre la base imponible (el IVA se puede recuperar por vía de factura rectificativa). Registrar la dotación.",
+      "input": "El cliente InsolventShop SL (CL43000015) lleva mas de 6 meses sin pagar y hay indicios claros de insolvencia. Saldo pendiente total: 2.420,00 EUR (base 2.000,00 EUR + IVA 420,00 EUR). Registrar la dotacion por deterioro correspondiente a este cliente.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1240,7 +1240,7 @@
       "id": 36,
       "categoria": "cierre_regularizacion",
       "descripcion": "Traspaso resultado del ejercicio a reservas — acuerdo de junta",
-      "input": "Cierre del ejercicio 2025. El resultado del ejercicio (cuenta 129xxxxx) es un beneficio de 35.000,00 €. La junta acuerda destinar el 10% a reserva legal (3.500,00 €) y el resto a reservas voluntarias (31.500,00 €). Registrar el traspaso.",
+      "input": "Cierre del ejercicio 2025. El resultado del ejercicio (cuenta es un beneficio de 35.000,00 €. La junta acuerda destinar el 10% a reserva legal (3.500,00 €) y el resto a reservas voluntarias (31.500,00 €). Registrar el traspaso.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1299,7 +1299,7 @@
       "id": 38,
       "categoria": "impuestos",
       "descripcion": "Liquidación IVA T1 2026 (modelo 303) — resultado a ingresar",
-      "input": "Liquidación IVA T1 2026 (modelo 303): IVA repercutido acumulado (477xxxxx): 8.500,00 €. IVA soportado deducible acumulado (472xxxxx): 3.200,00 €. Resultado: cuota diferencial a ingresar a Hacienda: 5.300,00 €. Registrar el asiento de liquidación (no el pago).",
+      "input": "Liquidación IVA T1 2026 (modelo 303): IVA repercutido acumulado: 8.500,00 €. IVA soportado deducible acumulado: 3.200,00 €. Resultado: cuota diferencial a ingresar a Hacienda: 5.300,00 €. Registrar el asiento de liquidación (no el pago).",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1358,7 +1358,7 @@
       "id": 40,
       "categoria": "impuestos",
       "descripcion": "Liquidación IVA T4 2025 (modelo 303) — resultado a compensar (saldo a favor)",
-      "input": "Liquidación IVA T4 2025 (modelo 303): IVA repercutido acumulado (477xxxxx): 2.100,00 €. IVA soportado deducible acumulado (472xxxxx): 3.800,00 €. Resultado: cuota a compensar en trimestres futuros: 1.700,00 €. Registrar el asiento de liquidación.",
+      "input": "Liquidación IVA T4 2025 (modelo 303): IVA repercutido acumulado: 2.100,00 €. IVA soportado deducible acumulado: 3.800,00 €. Resultado: cuota a compensar en trimestres futuros: 1.700,00 €. Registrar el asiento de liquidación.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1444,7 +1444,7 @@
       "id": 43,
       "categoria": "trampas_errores",
       "descripcion": "Trampa: IVA calculado sobre precio ya con IVA incluido — base debe extraerse",
-      "input": "Recibimos factura de Suministros SA por material de oficina. El documento indica únicamente 'Precio total con IVA incluido: 121,00 €'. IVA al 21%. Pago domiciliado en banco. IMPORTANTE: el 21% NO debe aplicarse sobre 121,00 €; la base es 121/1,21.",
+      "input": "Recibimos factura de Suministros SA por material de oficina. El documento indica únicamente 'Precio total con IVA incluido: 121,00 €'. IVA al 21%. Pago domiciliado en banco.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1476,7 +1476,7 @@
       "id": 44,
       "categoria": "trampas_errores",
       "descripcion": "Trampa: factura anual sin prorrateo — devengo estricto obligatorio (regresión)",
-      "input": "Recibimos en octubre 2026 factura anual de suscripción de software de Sage (PR40000003): 2.400,00 € + IVA 21% (504,00 €). Periodo cubierto: octubre 2026 a septiembre 2027 (12 meses). Pago inmediato en banco. NOTA: el gasto completo de 2.400 € NO puede imputarse a octubre — aplicar devengo estricto.",
+      "input": "Recibimos en octubre 2026 factura anual de suscripción de software de Sage (PR40000003): 2.400,00 € + IVA 21% (504,00 €). Periodo cubierto: octubre 2026 a septiembre 2027 (12 meses). Pago inmediato en banco.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1545,7 +1545,7 @@
       "id": 47,
       "categoria": "leasing_renting",
       "descripcion": "Cuota mensual de renting de vehículo — gasto corriente de explotación",
-      "input": "Recibimos factura de Renting Cars SL (PR40000013) por cuota mensual de mayo 2026 del renting de la furgoneta de reparto: 350,00 € + IVA 21% (73,50 €). Total a pagar: 423,50 €. Pago domiciliado en banco. El renting NO activa inmovilizado — es gasto corriente.",
+      "input": "Recibimos factura de Renting Cars SL (PR40000013) por cuota mensual de mayo 2026 del renting de la furgoneta de reparto: 350,00 € + IVA 21% (73,50 €). Total a pagar: 423,50 €. Pago domiciliado en banco.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1577,7 +1577,7 @@
       "id": 48,
       "categoria": "leasing_renting",
       "descripcion": "Adquisición en leasing — activación del inmovilizado y reconocimiento de deuda",
-      "input": "TechAcces firma contrato de leasing financiero para un servidor de alto rendimiento: valor del bien 12.000,00 €, con opción de compra al final del contrato. El bien se activa como equipo informático. Deuda total: 3.000,00 € a corto plazo (524xxxxx) y 9.000,00 € a largo plazo (174xxxxx). Registrar la activación inicial.",
+      "input": "TechAcces firma contrato de leasing financiero para un servidor de alto rendimiento: valor del bien 12.000,00 EUR, con opcion de compra al final del contrato que la empresa preve ejercer. Del importe total, 3.000,00 EUR vencen dentro de los proximos 12 meses y 9.000,00 EUR en plazos posteriores. Registrar la operacion inicial.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -1609,7 +1609,7 @@
       "id": 49,
       "categoria": "leasing_renting",
       "descripcion": "Cuota mensual de leasing — desglose entre principal, intereses e IVA",
-      "input": "Pagamos la cuota mensual del leasing del servidor. Desglose según cuadro de amortización del contrato: amortización de principal 250,00 €, intereses financieros 45,00 €, IVA 21% sobre (principal + intereses): 61,95 €. Total cargo en banco: 356,95 €.",
+      "input": "Pagamos la cuota mensual del leasing del servidor: cargo total en banco 356,95 EUR, IVA 21% incluido sobre la parte de principal e intereses. Segun el cuadro de amortizacion del contrato, el principal amortizado este mes es de 250,00 EUR.",
       "expected": {
         "estado": "OK",
         "lineas": [
