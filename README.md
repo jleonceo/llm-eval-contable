@@ -51,6 +51,32 @@ Este repositorio resuelve eso con la herramienta más vieja del mundo: **un exam
 
 *Matiz honesto: el 100% es sobre **este** examen de 50 casos. No significa que la skill sea infalible, significa que ya no falla ninguno de los patrones que el examen cubre. Ampliar el examen es la forma de volver a encontrar fallos.*
 
+> ### ⚠️ El examen cambió el 20/07/2026, así que el 100% de arriba ya no le corresponde
+>
+> Una auditoría del dataset encontró que **el caso 21 enseñaba un tratamiento fiscal que no
+> existe**. Planteaba el alquiler de un local de negocio como inversión del sujeto pasivo por
+> "renuncia a la exención". Verificado contra la AEAT y el BOE:
+>
+> - El alquiler de local **no está exento** de IVA — la exención del art. 20.Uno.23º LIVA es
+>   para viviendas. Sin exención no hay nada a lo que renunciar.
+> - El art. 84.Uno.2.e, que el caso invocaba, se aplica a **entregas** de inmuebles
+>   (compraventas), no a arrendamientos, y solo alcanza a las exenciones 20º y 22º.
+> - Faltaba la **retención del 19 % de IRPF** sobre el alquiler.
+>
+> Lo delata el propio examen: el **caso 42** dice que se retuvieron 684 € en un trimestre.
+> 684 / 0,19 = 3.600 = 3 × 1.200 €, exactamente la renta del caso 21. El dataset daba por
+> retenido lo que el caso 21 negaba.
+>
+> El caso 21 está corregido (alquiler con IVA repercutido + retención). **La consecuencia es
+> que la tabla de arriba mide un examen que ya no es este**: el 100 % corresponde a la versión
+> anterior. Hasta que se repita la serie completa, léela como historia del proceso, no como
+> el resultado vigente.
+>
+> Y el fallo de fondo que esto enseña, que es más útil que el caso: un examen puede estar
+> **internamente consistente y externamente equivocado**. El corrector cuadraba, los importes
+> cuadraban, el asiento cuadraba — y premiaba una respuesta que la ley no admite. Lo cazó
+> cotejar la fuente primaria, no volver a mirar el examen.
+
 ---
 
 ### Cobertura, 50 casos, 12 categorías

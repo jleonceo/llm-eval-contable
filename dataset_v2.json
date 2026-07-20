@@ -754,9 +754,9 @@
     },
     {
       "id": 21,
-      "categoria": "isp_domestico",
-      "descripcion": "ISP doméstico — arrendamiento local con renuncia a exención (art. 84.1.2.e LIVA)",
-      "input": "Recibimos factura del propietario del local Inmobiliaria BCN SL (arrendador, PR40000010) por alquiler de mayo 2026: 1.200,00 € sin IVA. El arrendador ha renunciado a la exención de IVA (art. 84.1.2.e LIVA). Como arrendatario empresario, aplicamos ISP al 21%. Pago domiciliado en banco.",
+      "categoria": "retencion_arrendamiento",
+      "descripcion": "Arrendamiento de local de negocio: IVA 21% repercutido por el arrendador + retencion IRPF 19% (NO hay ISP: el alquiler de local no esta exento, luego no cabe renuncia)",
+      "input": "Recibimos factura del arrendador del local (Patrimonial Sants CB, PR40000010) por el alquiler de mayo 2026: base imponible 1.200,00 EUR, IVA 21% (252,00 EUR) y retencion de IRPF 19% (228,00 EUR). Liquido a pagar 1.224,00 EUR, domiciliado en banco.",
       "expected": {
         "estado": "OK",
         "lineas": [
@@ -771,21 +771,21 @@
             "haber": 0.0
           },
           {
-            "cuenta_prefijo": "477",
+            "cuenta_prefijo": "4751",
             "debe": 0.0,
-            "haber": 252.0
+            "haber": 228.0
           },
           {
             "cuenta_prefijo": "572",
             "debe": 0.0,
-            "haber": 1200.0
+            "haber": 1224.0
           }
         ],
         "flags": {
           "requiere_periodificacion": false,
-          "isp": true,
+          "isp": false,
           "freno_nominas": false,
-          "retencion_irpf": false
+          "retencion_irpf": true
         }
       }
     },
