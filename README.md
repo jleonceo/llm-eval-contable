@@ -113,19 +113,24 @@ Este repositorio resuelve eso con la herramienta más vieja del mundo: **un exam
 
 ---
 
-### Cómo funciona el eval
+### Cómo funciona el examen
 
-#### Arquitectura
+Un **eval** es un examen automático a un modelo de lenguaje: se le pasan siempre los mismos casos,
+con la respuesta correcta escrita de antemano, y un programa compara lo que contesta con lo que
+debía contestar. Sirve para saber si una versión nueva mejora o empeora, en vez de decidirlo por la
+impresión que dan cuatro pruebas sueltas.
+
+#### Las tres piezas
 
 ```
-dataset_v2.json          ← 50 casos de test con expected outputs
+dataset_v2.json          ← 50 casos, cada uno con su respuesta correcta
      │
      ▼
-runner.py  ──────────────── carga skill_prompt.md como system prompt
-     │                ───── llama a la API de Claude (temperature=0)
-     │                ───── parsea la respuesta JSON
+runner.py  ──────────────── carga skill_prompt.md como instrucciones del modelo
+     │                ───── llama a la API de Claude (temperature=0, sin azar)
+     │                ───── interpreta la respuesta, que viene en formato JSON
      ▼
-results/YYYY-MM-DD_HHMM_sonnet.json   ← output raw por caso
+results/AAAA-MM-DD_HHMM_sonnet.json   ← lo que contestó, caso a caso, sin retocar
      │
      ▼
 grader.py  ──────────────── valida: coincidencia por prefijo PGC
@@ -135,11 +140,17 @@ grader.py  ──────────────── valida: coincidencia
                        ───── reporta por categoría
 ```
 
-#### Qué verifica el grader
+El **corrector** (`grader.py`) es la pieza que pone la nota. Trabaja sobre lo ya guardado, así que
+puede volver a puntuar un examen antiguo sin gastar una sola llamada al modelo.
+
+#### Qué verifica el corrector
 
 1. **Estado**, OK vs PENDIENTE_VERIFICACION (freno obligatorio cuando faltan datos)
 2. **Cuadre**, total DEBE debe igualar total HABER (±€0,01)
-3. **Líneas del asiento**, cada línea esperada debe coincidir por **prefijo PGC** (no código exacto), importe y lado (debe/haber)
+3. **Líneas del asiento**, cada línea esperada debe coincidir por **prefijo PGC**, importe y lado
+   (debe o haber). Prefijo significa que basta con acertar la familia de la cuenta del Plan General
+   Contable: si la respuesta correcta es la 4300 y el modelo escribe 43000002, se da por buena,
+   porque las dos son «clientes» y el dígito final depende de cómo tenga cada empresa su plan.
 4. **Flags semánticos**, `requiere_periodificacion`, `isp`, `freno_nominas`, `retencion_irpf`
 
 La validación por prefijo (`startswith`) es clave: la skill usa códigos de 8 dígitos específicos de empresa (ej. `47200001`), pero el test solo exige el grupo PGC correcto (ej. `472`). Esto testea el conocimiento contable, no la memorización de códigos.
@@ -243,7 +254,7 @@ El dataset espera output JSON con esta estructura:
 }
 ```
 
-Sustituye `skill_prompt.md` por tu system prompt. Ajusta `dataset_v2.json` con tus casos de test. La lógica de `grader.py` es genérica y reutilizable.
+Sustituye `skill_prompt.md` por las instrucciones de tu modelo y ajusta `dataset_v2.json` con tus propios casos. La lógica de `grader.py` no depende de la contabilidad, así que sirve para cualquier examen que compare una respuesta con la esperada.
 
 ---
 
@@ -327,9 +338,9 @@ Analista de Datos · Business Intelligence · IA Aplicada al Negocio
 
 ### What This Is
 
-An eval-driven development pipeline to test and iteratively improve an LLM-based accounting assistant. The skill under test generates Spanish double-entry bookkeeping entries (PGC, *Plan General Contable*) from natural language descriptions.
+An **eval** is an automated exam for a language model: the same cases every time, each with its correct answer written beforehand, and a program that compares what the model answered against what it should have answered. This repo is an eval-driven pipeline to test and iteratively improve an LLM-based accounting assistant. The skill under test generates Spanish double-entry bookkeeping entries (PGC, *Plan General Contable*) from natural language descriptions.
 
-**The core insight:** improving an LLM skill is not about writing more instructions, it's about measuring failure patterns systematically, fixing the root cause, and verifying fixes don't break passing cases (regression testing).
+**The core insight:** improving an LLM skill takes measuring failure patterns systematically, fixing the root cause, and verifying that fixes leave the passing cases intact. Writing more instructions is what everyone tries first. It is also what stops working soonest.
 
 ### Score Progression
 
