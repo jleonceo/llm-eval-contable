@@ -57,7 +57,7 @@ Este repositorio resuelve eso con la herramienta más vieja del mundo: **un exam
 > existe**. Planteaba el alquiler de un local de negocio como inversión del sujeto pasivo por
 > "renuncia a la exención". Verificado contra la AEAT y el BOE:
 >
-> - El alquiler de local **no está exento** de IVA — la exención del art. 20.Uno.23º LIVA es
+> - El alquiler de local **no está exento** de IVA: la exención del art. 20.Uno.23º LIVA es
 >   para viviendas. Sin exención no hay nada a lo que renunciar.
 > - El art. 84.Uno.2.e, que el caso invocaba, se aplica a **entregas** de inmuebles
 >   (compraventas), no a arrendamientos, y solo alcanza a las exenciones 20º y 22º.
@@ -82,14 +82,14 @@ Este repositorio resuelve eso con la herramienta más vieja del mundo: **un exam
 > Lo peor no era el error de fondo: **el enunciado dictaba la respuesta**. Decía literalmente
 > *"aplica ISP obligatorio (art. 84.1.2.f LIVA)"* dentro del input. Así el caso no medía si el
 > modelo conoce la norma, medía si obedece una premisa falsa que se le entrega. Reescrito para
-> dar los hechos —tipo de obra, valor del local— y que el modelo tenga que decidir.
+> dar los hechos (tipo de obra, valor del local) y que el modelo tenga que decidir.
 >
 > Comprobado tras la corrección: los 50 casos cuadran (debe = haber) y **ningún enunciado dicta
 > ya su propia respuesta**.
 >
 > Y el fallo de fondo que esto enseña, que es más útil que el caso: un examen puede estar
 > **internamente consistente y externamente equivocado**. El corrector cuadraba, los importes
-> cuadraban, el asiento cuadraba — y premiaba una respuesta que la ley no admite. Lo cazó
+> cuadraban, el asiento cuadraba, y aun así premiaba una respuesta que la ley no admite. Lo cazó
 > cotejar la fuente primaria, no volver a mirar el examen.
 
 ---
