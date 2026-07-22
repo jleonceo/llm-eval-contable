@@ -1,4 +1,4 @@
-# LLM Eval, Contable Experto
+# LLM Eval de la skill Contable Experto
 
 **Framework de evaluación automática para una skill contable en LLM**
 *Automated evaluation framework for a Spanish PGC accounting LLM skill*
@@ -31,7 +31,7 @@ Un pipeline de **desarrollo orientado a evaluación** para medir y mejorar itera
 
 Imagina que contratas a un especialista. El primer día le das un manual con cómo se trabaja en tu casa: tus reglas, tus casos especiales, los errores que no puede cometer y el formato en el que entrega. Eso es una **skill**: el manual de instrucciones que convierte una IA genérica en un especialista de tu tarea concreta.
 
-El problema viene después, y casi nadie habla de él: **¿cómo sabes que tu especialista hace bien su trabajo?** Una IA siempre responde con seguridad, acierte o no. Si le pides un asiento contable, te lo da; que sea correcto es otra historia. Fiarse de la sensación ("parece que va bien") es la receta para llevarse sorpresas justo donde más duele.
+El problema viene después, aunque casi nadie habla de él: **¿cómo sabes que tu especialista hace bien su trabajo?** Una IA siempre responde con seguridad, acierte o no. Si le pides un asiento contable, te lo da; que sea correcto es otra historia. Fiarse de la sensación ("parece que va bien") es la receta para llevarse sorpresas justo donde más duele.
 
 Este repositorio resuelve eso con la herramienta más vieja del mundo: **un examen**. 50 casos con su respuesta correcta conocida, un corrector automático que puntúa sin piedad, y una regla de oro, cuando un caso falla, se corrige la skill y se repite el examen *entero*, para comprobar que el arreglo no ha roto lo que ya funcionaba. La skill pasó de aprobar el 66% del examen a aprobarlo entero. No porque la IA mejorase: porque el manual mejoró, medido fallo a fallo.
 
@@ -94,7 +94,7 @@ Este repositorio resuelve eso con la herramienta más vieja del mundo: **un exam
 
 ---
 
-### Cobertura, 50 casos, 12 categorías
+### Cobertura: 50 casos en 12 categorías
 
 | Categoría | Casos | Qué testea |
 |---------|-------|------------|
@@ -288,7 +288,7 @@ Ver [`results/summary.md`](results/summary.md) para el análisis completo con de
 
 ---
 
-### Qué pasó después, el capítulo 2
+### Qué pasó después: el capítulo 2
 
 Este proyecto fue el primer paso de algo más grande. El método que ves aquí (examen con respuestas conocidas → medir → corregir la causa raíz → re-examinar todo) escaló después a un **enjambre de 4 agentes** que procesa documentos contables reales de extremo a extremo, con un banco de pruebas de 128 casos generados desde la propia base de datos y puertas de no-regresión.
 
