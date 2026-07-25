@@ -3,8 +3,8 @@
 **Framework de evaluación automática para una skill contable en LLM**
 *Automated evaluation framework for a Spanish PGC accounting LLM skill*
 
-> 50 casos de test · 12 categorías · 6 iteraciones · **66% → 100% medido** · Mitigación de sesgos cognitivos en IA
-> *50 test cases · 12 categories · 6 iterations · **66% → 100% measured** · AI cognitive bias mitigation*
+> 50 casos de test **sintéticos** · 12 categorías · 6 iteraciones · **66% → 100% sobre ese examen** · Mitigación de sesgos cognitivos en IA
+> *50 **synthetic** test cases · 12 categories · 6 iterations · **66% → 100% on that test set** · AI cognitive bias mitigation*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-green.svg)](https://www.python.org/)
