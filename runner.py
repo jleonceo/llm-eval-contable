@@ -31,6 +31,14 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+# La consola de Windows usa cp1252 por defecto y no puede escribir la flecha que sale en los
+# mensajes de ayuda. El peor de ellos era el que explica como crear el `.env`: quien clonaba el
+# repo y lo ejecutaba antes de configurar su clave recibia un UnicodeEncodeError en lugar de la
+# instruccion que necesitaba.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 try:
     # truststore parchea el SSL de Python para usar el CA store del sistema operativo
     # en lugar del bundle estático de certifi. Necesario en Windows cuando el antivirus
