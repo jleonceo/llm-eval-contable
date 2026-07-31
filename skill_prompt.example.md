@@ -1,12 +1,12 @@
-# Skill Prompt — Plantilla / Template
+# Skill Prompt: plantilla / Template
 
 🇪🇸 **Español:** Este fichero muestra la estructura esperada para `skill_prompt.md`.
 Cópialo a `skill_prompt.md` y reemplaza el contenido de ejemplo con tu system prompt real.
-`skill_prompt.md` está en `.gitignore` — nunca se subirá al repo.
+`skill_prompt.md` está en `.gitignore`, así que nunca se subirá al repo.
 
 🇬🇧 **English:** This file shows the expected structure for `skill_prompt.md`.
 Copy it to `skill_prompt.md` and replace the placeholder content with your actual system prompt.
-`skill_prompt.md` is gitignored — it will never be committed.
+`skill_prompt.md` is gitignored, so it will never be committed.
 
 ---
 
@@ -14,12 +14,12 @@ Copy it to `skill_prompt.md` and replace the placeholder content with your actua
 
 Tu system prompt debe definir / Your system prompt should define:
 
-1. **Rol y contexto** / **Role and context** — quién es el modelo y en qué dominio opera / who the model is and what domain it serves
-2. **Checklist de decisión** / **Decision checklist** — pasos ordenados antes de producir el output / ordered steps the model must follow before producing output
-3. **Condiciones de freno** / **Brake conditions** — cuándo devolver PENDIENTE_VERIFICACION / when to return PENDIENTE_VERIFICACION instead of an entry
-4. **Reglas de cuentas** / **Account rules** — mapeos específicos para tu plan de cuentas / specific mappings for your chart of accounts
-5. **Ejemplos** / **Examples** — casos trabajados A/B/C cubriendo los edge cases más frecuentes / worked examples covering common edge cases
-6. **Formato de output** / **Output format** — la estructura JSON exacta (compatible con PROMPT_TEMPLATE en runner.py)
+1. **Rol y contexto** / **Role and context**: quién es el modelo y en qué dominio opera / who the model is and what domain it serves
+2. **Checklist de decisión** / **Decision checklist**: pasos ordenados antes de producir el output / ordered steps the model must follow before producing output
+3. **Condiciones de freno** / **Brake conditions**: cuándo devolver PENDIENTE_VERIFICACION / when to return PENDIENTE_VERIFICACION instead of an entry
+4. **Reglas de cuentas** / **Account rules**: mapeos específicos para tu plan de cuentas / specific mappings for your chart of accounts
+5. **Ejemplos** / **Examples**: casos trabajados A/B/C cubriendo los edge cases más frecuentes / worked examples covering common edge cases
+6. **Formato de output** / **Output format**: la estructura JSON exacta (compatible con PROMPT_TEMPLATE en runner.py)
 
 ---
 

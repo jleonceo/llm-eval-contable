@@ -1,5 +1,5 @@
-# Resultados del Eval — Progresión de Puntuaciones
-# Eval Results — Score Progression
+# Resultados del Eval: progresión de puntuaciones
+# Eval Results: Score Progression
 
 **Skill evaluada / Skill under test:** contable-experto (asistente contable PGC en español / Spanish PGC accounting assistant)
 **Modelo / Model:** claude-sonnet-4-6
@@ -10,21 +10,21 @@
 
 ## Progresión / Score Progression
 
-| Run | Fecha / Date | Puntuación / Score | % | Versión skill | Cambio clave / Key change |
+| Run | Fecha / Date | Puntuación / Score | % | Versión skill | Cambio / Key change |
 |-----|------|-------|---|---------------|-------------|
-| 1 — Baseline | 2026-05-26 | 33 / 50 | 66% | v1.0 | Skill inicial / Initial skill |
+| 1 (baseline) | 2026-05-26 | 33 / 50 | 66% | v1.0 | Skill inicial / Initial skill |
 | 2 | 2026-05-26 | 36 / 50 | 72% | v1.5 | Taxonomía IVA, reglas ISP / VAT taxonomy, ISP rules |
 | 3 | 2026-05-26 | 38 / 50 | 76% | v2.0 | Lógica de freno, nóminas 465 / Brake logic, payroll 465 |
 | 4 | 2026-05-27 | 41 / 50 | 82% | v2.2 | Activación leasing, periodificación / Leasing activation |
 | 5 | 2026-05-27 | 44 / 50 | 88% | v2.6 | Excepción SaaS, 640 vs 641, embargo / Garnishments |
-| **6 — final** | 2026-05-28 | **50 / 50** | **100%** | v3.0 | Correcciones dataset + ejemplos F y G (periodificación pasiva, traspaso a reservas) / Dataset fixes + examples F & G |
+| **6 (final)** | 2026-05-28 | **50 / 50** | **100%** | v3.0 | Correcciones dataset + ejemplos F y G (periodificación pasiva, traspaso a reservas) / Dataset fixes + examples F & G |
 
-*Run 6 ejecutado y verificado — resultado completo en `2026-05-28_1654_sonnet.json` (este directorio), re-puntuable con `grader.py`.*
-*Run 6 executed and verified — full result in `2026-05-28_1654_sonnet.json` (this folder), re-scorable with `grader.py`.*
+*Run 6 ejecutado y verificado: resultado completo en `2026-05-28_1654_sonnet.json` (este directorio), re-puntuable con `grader.py`.*
+*Run 6 executed and verified: full result in `2026-05-28_1654_sonnet.json` (this folder), re-scorable with `grader.py`.*
 
 ---
 
-## Resultados por categoría — Run 5 / Category Results — Run 5
+## Resultados por categoría (Run 5) / Category Results (Run 5)
 
 | Categoría / Category | Casos / Cases | Pasan / Pass | % |
 |---------|-------|------|---|
@@ -52,7 +52,7 @@
 | 33 | periodificaciones | Error en dataset: `requiere_periodificacion: true` era incorrecto (devengo del mes corriente ≠ periodificación) / Dataset error: current-month accrual ≠ periodificación | Cambiado a `false` en dataset / Changed to `false` in dataset | ✅ Resuelto / Fixed v2.8 |
 | 49 | leasing_renting | Pre-vuelo bloqueaba pago de cuota de leasing (524 CP, no 174 LP) / Pre-flight blocked leasing payment | Aclaración en skill + refinamiento pre-vuelo / Skill clarification + pre-flight refinement | ✅ Resuelto / Fixed v2.8 |
 | 34 | cierre_regularizacion | Prefijo demasiado estricto en dataset (`300`, `610` en lugar de `30`, `61`) / Overly strict prefix in dataset | Relajado a 2 dígitos / Relaxed to 2-digit prefix | ✅ Resuelto / Fixed (run 6) |
-| — | — | Dos casos edge adicionales (periodificación pasiva, traspaso a reservas) / Two further edge cases | Ejemplos F y G añadidos a la skill (v3.0) / Examples F & G added to the skill | ✅ Resuelto / Fixed (run 6: 50/50) |
+| - | - | Dos casos edge adicionales (periodificación pasiva, traspaso a reservas) / Two further edge cases | Ejemplos F y G añadidos a la skill (v3.0) / Examples F & G added to the skill | ✅ Resuelto / Fixed (run 6: 50/50) |
 
 ---
 
@@ -60,13 +60,13 @@
 
 ### Qué mueve más la puntuación / What moves the score most
 
-1. **Precisión del freno / Brake precision** — el modelo debe saber exactamente cuándo rechazar / the model must know exactly when to refuse. Demasiado agresivo = falsos positivos. Demasiado permisivo = asientos incorrectos. La pregunta de pre-vuelo resolvió esto / The pre-flight question pattern solved this.
+1. **Precisión del freno / Brake precision**: el modelo debe saber exactamente cuándo rechazar / the model must know exactly when to refuse. Demasiado agresivo = falsos positivos. Demasiado permisivo = asientos incorrectos. La pregunta de pre-vuelo resolvió esto / The pre-flight question pattern solved this.
 
-2. **Profundidad del prefijo PGC / Account prefix depth** — testear al nivel de grupo de 2 dígitos vs subgrupo de 3 dígitos importa. Prefijos demasiado estrictos en el dataset penalizan asientos correctos / Overly strict prefixes in the dataset penalise correct entries.
+2. **Profundidad del prefijo PGC / Account prefix depth**: testear al nivel de grupo de 2 dígitos vs subgrupo de 3 dígitos importa. Prefijos demasiado estrictos en el dataset penalizan asientos correctos / Overly strict prefixes in the dataset penalise correct entries.
 
-3. **Mitigación de sesgo cognitivo / Cognitive bias mitigation** — la pregunta de pre-vuelo ataca directamente el sesgo de recencia (lo último en lo que piensa el modelo antes del output ancla la respuesta). Fue la mejora más grande de los runs 4→5 / This was the single biggest improvement in runs 4→5.
+3. **Mitigación de sesgo cognitivo / Cognitive bias mitigation**: la pregunta de pre-vuelo ataca directamente el sesgo de recencia (lo último en lo que piensa el modelo antes del output ancla la respuesta). Fue la mejora más grande de los runs 4→5 / This was the single biggest improvement in runs 4→5.
 
-4. **Casos trampa / Trap cases** — las categorías como `trampas_errores` no solo testean conocimiento — testean que el modelo resiste el fallo más común de los LLM: conformarse con el marco del usuario aunque la petición sea incorrecta / they test that the model resists the most common LLM failure mode: compliance with user framing even when the request is wrong.
+4. **Casos trampa / Trap cases**: categorías como `trampas_errores` no se quedan en el conocimiento. Miden si el modelo resiste el fallo más común de los LLM: conformarse con el marco del usuario aunque la petición sea incorrecta / they test that the model resists the most common LLM failure mode: compliance with user framing even when the request is wrong.
 
 ### Lo que no mueve la puntuación / What doesn't move the score
 
