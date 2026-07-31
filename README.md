@@ -140,7 +140,7 @@ grader.py  ──────────────── valida: coincidencia
                        ───── reporta por categoría
 ```
 
-El **corrector** (`grader.py`) es la pieza que pone la nota. Trabaja sobre lo ya guardado, así que
+El **corrector** (`grader.py`) es la pieza que pone la nota. Trabaja sobre lo ya guardado. Así que
 puede volver a puntuar un examen antiguo sin gastar una sola llamada al modelo.
 
 #### Qué verifica el corrector
@@ -283,7 +283,7 @@ llm-eval-contable/
 El PGC usa una jerarquía de cuentas. Las empresas las extienden con sufijos propios (ej. `47200001` para una cuenta IVA específica). Testear códigos exactos haría el eval frágil y específico de empresa. La validación por prefijo (`62x` = cualquier cuenta de gasto) testea el conocimiento contable que realmente importa.
 
 **¿Por qué temperature=0?**
-Reproducibilidad. Con temperature > 0, el mismo caso puede pasar o fallar entre runs por razones aleatorias. Entonces ya no se puede atribuir un cambio de puntuación a un cambio en el prompt. Temperature cero hace cada run determinista.
+Reproducibilidad. Con temperature > 0, el mismo caso puede pasar o fallar entre runs por razones aleatorias y ya no hay forma de atribuir un cambio de puntuación a un cambio en el prompt. Temperature cero hace cada run determinista.
 
 **¿Por qué output en JSON?**
 El output estructurado permite evaluación automática. Las explicaciones contables en texto libre son útiles para humanos. A escala son imposibles de evaluar. El formato JSON además obliga al modelo a ser preciso con los importes.
