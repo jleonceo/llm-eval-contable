@@ -48,7 +48,9 @@ writes 43000002, it counts as right, because both are customers.
 | 5 | 44 | Software subscriptions as expenses, wages versus severance, and garnishments |
 | 6 | 50 | Deferred income, transfer to reserves and fixes to the test |
 
-The changes that helped most target known reasoning errors. A final question makes the model check whether data
+The changes that helped most target known reasoning errors.
+
+A final question makes the model check whether data
 is missing, such as the income-tax withholding rate, before writing the entry. Four trap cases ask it for an
 unbalanced entry or one without enough data, and the right answer is to refuse and ask for what is missing.
 

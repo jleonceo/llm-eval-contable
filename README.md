@@ -48,7 +48,9 @@ modelo escribe la 43000002, la da por buena, porque las dos son clientes.
 | 5 | 44 | Suscripciones de software como gasto, sueldos frente a indemnizaciones y embargos |
 | 6 | 50 | Periodificación de ingresos, traspaso a reservas y correcciones del examen |
 
-Los cambios que más ayudaron atacan errores de razonamiento conocidos. Una pregunta final obliga al modelo a
+Los cambios que más ayudaron atacan errores de razonamiento conocidos.
+
+Una pregunta final obliga al modelo a
 comprobar si faltan datos, como el porcentaje de IRPF, antes de escribir el asiento. Cuatro casos trampa le piden
 un asiento descuadrado o sin datos suficientes, y la respuesta correcta es negarse y pedir lo que falta.
 

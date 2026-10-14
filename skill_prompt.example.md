@@ -1,10 +1,10 @@
 # Skill Prompt: plantilla / Template
 
-🇪🇸 **Español:** Este fichero muestra la estructura esperada para `skill_prompt.md`.
+🇪🇸 Español: Este fichero muestra la estructura esperada para `skill_prompt.md`.
 Cópialo a `skill_prompt.md` y reemplaza el contenido de ejemplo con tu system prompt real.
 `skill_prompt.md` está en `.gitignore`, así que nunca se subirá al repo.
 
-🇬🇧 **English:** This file shows the expected structure for `skill_prompt.md`.
+🇬🇧 English: This file shows the expected structure for `skill_prompt.md`.
 Copy it to `skill_prompt.md` and replace the placeholder content with your actual system prompt.
 `skill_prompt.md` is gitignored, so it will never be committed.
 

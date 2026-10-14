@@ -60,13 +60,13 @@
 
 ### Qué mueve más la puntuación / What moves the score most
 
-1. **Precisión del freno / Brake precision**: el modelo debe saber exactamente cuándo rechazar / the model must know exactly when to refuse. Demasiado agresivo = falsos positivos. Demasiado permisivo = asientos incorrectos. La pregunta de pre-vuelo resolvió esto / The pre-flight question pattern solved this.
+1. Precisión del freno / Brake precision: el modelo debe saber exactamente cuándo rechazar / the model must know exactly when to refuse. Demasiado agresivo = falsos positivos. Demasiado permisivo = asientos incorrectos. La pregunta de pre-vuelo resolvió esto / The pre-flight question pattern solved this.
 
-2. **Profundidad del prefijo PGC / Account prefix depth**: testear al nivel de grupo de 2 dígitos vs subgrupo de 3 dígitos importa. Prefijos demasiado estrictos en el dataset penalizan asientos correctos / Overly strict prefixes in the dataset penalise correct entries.
+2. Profundidad del prefijo PGC / Account prefix depth: testear al nivel de grupo de 2 dígitos vs subgrupo de 3 dígitos importa. Prefijos demasiado estrictos en el dataset penalizan asientos correctos / Overly strict prefixes in the dataset penalise correct entries.
 
-3. **Mitigación de sesgo cognitivo / Cognitive bias mitigation**: la pregunta de pre-vuelo ataca directamente el sesgo de recencia (lo último en lo que piensa el modelo antes del output ancla la respuesta). Fue la mejora más grande de los runs 4→5 / This was the single biggest improvement in runs 4→5.
+3. Mitigación de sesgo cognitivo / Cognitive bias mitigation: la pregunta de pre-vuelo ataca directamente el sesgo de recencia (lo último en lo que piensa el modelo antes del output ancla la respuesta). Fue la mejora más grande de los runs 4→5 / This was the single biggest improvement in runs 4→5.
 
-4. **Casos trampa / Trap cases**: categorías como `trampas_errores` no se quedan en el conocimiento. Miden si el modelo resiste el fallo más común de los LLM: conformarse con el marco del usuario aunque la petición sea incorrecta / they test that the model resists the most common LLM failure mode: compliance with user framing even when the request is wrong.
+4. Casos trampa / Trap cases: categorías como `trampas_errores` no se quedan en el conocimiento. Miden si el modelo resiste el fallo más común de los LLM: conformarse con el marco del usuario aunque la petición sea incorrecta / they test that the model resists the most common LLM failure mode: compliance with user framing even when the request is wrong.
 
 ### Lo que no mueve la puntuación / What doesn't move the score
 
