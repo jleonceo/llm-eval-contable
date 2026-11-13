@@ -27,13 +27,13 @@ full after every change. That also shows whether fixing one case broke another.
 ## What is inside
 
 ```mermaid
-flowchart TD
-    DS[dataset_v2.json<br/>50 cases in 12 categories] --> RU[runner.py<br/>the model answers, temperature 0]
-    SK[Model instructions<br/>version N] --> RU
-    RU --> GR[grader.py<br/>status, balance, lines and flags]
-    GR --> RE[results/<br/>score per case]
-    RE --> FA{Which cases fail?}
-    FA -->|Instructions are corrected| SK
+flowchart LR
+    DS[dataset_v2.json<br/>50 cases in<br/>12 categories] --> RU[runner.py<br/>the model answers,<br/>temperature 0]
+    SK[Model<br/>instructions<br/>version N] --> RU
+    RU --> GR[grader.py<br/>status, balance,<br/>lines and flags]
+    GR --> RE[results/<br/>score<br/>per case]
+    RE --> FA{Which cases<br/>fail?}
+    FA -->|Instructions<br/>are corrected| SK
     style FA fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
     style RE fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
 ```

@@ -27,13 +27,13 @@ repita entero después de cada cambio. Así se ve también si el arreglo de un c
 ## Qué hay dentro
 
 ```mermaid
-flowchart TD
-    DS[dataset_v2.json<br/>50 casos en 12 categorías] --> RU[runner.py<br/>el modelo responde, temperatura 0]
-    SK[Instrucciones del modelo<br/>versión N] --> RU
-    RU --> GR[grader.py<br/>estado, cuadre, líneas y marcas]
-    GR --> RE[results/<br/>aciertos por caso]
-    RE --> FA{¿Qué casos falla?}
-    FA -->|Se corrigen las instrucciones| SK
+flowchart LR
+    DS[dataset_v2.json<br/>50 casos en<br/>12 categorías] --> RU[runner.py<br/>el modelo responde,<br/>temperatura 0]
+    SK[Instrucciones<br/>del modelo<br/>versión N] --> RU
+    RU --> GR[grader.py<br/>estado, cuadre,<br/>líneas y marcas]
+    GR --> RE[results/<br/>aciertos<br/>por caso]
+    RE --> FA{¿Qué casos<br/>falla?}
+    FA -->|Se corrigen las<br/>instrucciones| SK
     style FA fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
     style RE fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
 ```
