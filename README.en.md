@@ -94,8 +94,8 @@ expected one and does not depend on accounting.
 
 ## Related repositories
 
-- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): the next step, four agents that
-  process real accounting documents, measured with a 128-case test.
+- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): the next step, with five agents that
+  turn a fictitious company's accounting documents into entries, with their test set and measurements.
 - [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): the rules for
   changing a model's instructions without breaking what already worked.
 - [analisis-contable](https://github.com/jleonceo/analisis-contable): 2024 income statement and cash with

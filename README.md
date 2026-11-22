@@ -93,8 +93,8 @@ JSON con la esperada y no depende de la contabilidad.
 
 ## Repositorios relacionados
 
-- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): el paso siguiente, cuatro agentes
-  que procesan documentos contables reales, medidos con un examen de 128 casos.
+- [accounting-agent-swarm](https://github.com/jleonceo/accounting-agent-swarm): el paso siguiente, con cinco agentes
+  que convierten en asientos los documentos contables de una empresa ficticia, con su examen y sus mediciones.
 - [gobernanza-skills-analiticas](https://github.com/jleonceo/gobernanza-skills-analiticas): las reglas para
   cambiar las instrucciones de un modelo sin empeorar lo que ya funcionaba.
 - [analisis-contable](https://github.com/jleonceo/analisis-contable): cuenta de resultados y tesorería de 2024
